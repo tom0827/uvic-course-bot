@@ -1,0 +1,10 @@
+from enum import Enum
+
+CATALOG_URL = 'https://uvic.kuali.co/api/v1/catalog/courses/5f21b66d95f09c001ac436a0'
+DETAILS_BASE_URL = 'https://uvic.kuali.co/api/v1/catalog/course/5d9ccc4eab7506001ae4c225'
+HEAT_BASE_URL = 'https://heat.csc.uvic.ca/coview/course/<TERM>/<COURSE>?unp=t'
+
+class TermEnum(Enum):
+    FALL = "091"
+    SPRING = "011"
+    SUMMER = "052"
