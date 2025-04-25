@@ -1,0 +1,67 @@
+[
+    {
+        "title": "Real Time Computer Systems Design Project",
+        "subject": "ECE",
+        "number": "455",
+        "section": "A01",
+        "type": "Lecture",
+        "crn": 20923,
+        "campus": "Online",
+        "instructional_method": "Fully Online",
+        "meeting_time": "None\nStart Date: Jan 06, 2025\nEnd Date: Apr 04, 2025",
+        "section_status": "8 of 120 seats remain.50 of 50 waitlist seats remain.",
+        "credits": "1.5"
+    },
+    {
+        "title": "Real Time Computer Systems Design Project",
+        "subject": "ECE",
+        "number": "455",
+        "section": "B01",
+        "type": "Lab",
+        "crn": 20924,
+        "campus": "Main (Gordon Head)",
+        "instructional_method": "Face-to-face",
+        "meeting_time": "Tuesday\n03:00 PM - 05:50 PM\nStart Date: Jan 27, 2025\nEnd Date: Apr 04, 2025",
+        "section_status": "0 of 32 seats remain.3 of 3 waitlist seats remain.",
+        "credits": "0"
+    },
+    {
+        "title": "Real Time Computer Systems Design Project",
+        "subject": "ECE",
+        "number": "455",
+        "section": "B02",
+        "type": "Lab",
+        "crn": 20925,
+        "campus": "Main (Gordon Head)",
+        "instructional_method": "Face-to-face",
+        "meeting_time": "Wednesday\n02:30 PM - 05:20 PM\nStart Date: Jan 27, 2025\nEnd Date: Apr 04, 2025",
+        "section_status": "3 of 32 seats remain.3 of 3 waitlist seats remain.",
+        "credits": "0"
+    },
+    {
+        "title": "Real Time Computer Systems Design Project",
+        "subject": "ECE",
+        "number": "455",
+        "section": "B03",
+        "type": "Lab",
+        "crn": 20926,
+        "campus": "Main (Gordon Head)",
+        "instructional_method": "Face-to-face",
+        "meeting_time": "Thursday\n03:30 PM - 06:20 PM\nStart Date: Jan 27, 2025\nEnd Date: Apr 04, 2025",
+        "section_status": "1 of 32 seats remain.3 of 3 waitlist seats remain.",
+        "credits": "0"
+    },
+    {
+        "title": "Real Time Computer Systems Design Project",
+        "subject": "ECE",
+        "number": "455",
+        "section": "B04",
+        "type": "Lab",
+        "crn": 24094,
+        "campus": "Main (Gordon Head)",
+        "instructional_method": "Face-to-face",
+        "meeting_time": "Monday\n02:30 PM - 05:20 PM\nStart Date: Jan 27, 2025\nEnd Date: Apr 04, 2025",
+        "section_status": "10 of 30 seats remain.3 of 3 waitlist seats remain.",
+        "credits": "0"
+    }
+]

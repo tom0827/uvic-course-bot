@@ -36,10 +36,10 @@ class CourseInfo():
             return
 
         details = details_response.json()
-        self.description = self._remove_html_tags(details.get('description'))
-        self.pre_and_co_reqs = self._remove_html_tags(details.get('preAndCorequisites'))
+        self.description = self.__remove_html_tags(details.get('description'))
+        self.pre_and_co_reqs = self.__remove_html_tags(details.get('preAndCorequisites'))
     
-    def _remove_html_tags(self, text):
+    def __remove_html_tags(self, text):
         from bs4 import BeautifulSoup
         return BeautifulSoup(text, "html.parser").get_text()
 
