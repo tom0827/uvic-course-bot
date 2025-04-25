@@ -90,24 +90,20 @@ async def availability(
     course_availability = CourseAvailability(subject, course_number, term, year)
     data = await course_availability.get_availability()
 
-    title = f"Availability for {subject} {course_number} - {data[0]['title']}"
-
     embed = discord.Embed(
-        title=title,
-        description=f"Description for {subject} {course_number}",
+        title=f"Course Information for {subject} {course_number} - {data[0]['title']}",
+        description=f"Description for {subject} {course_number}", # TODO: Add hyperlink to course description
         timestamp=discord.utils.utcnow(),
         color=discord.Color.blue()
     )
 
-    
-    for course in data:
+    for idx, course in enumerate(data):
         available_spots = course['section_status'].split(" ")[0]
 
         method_emoji = "💻" if course['instructional_method'] == "Fully Online" else "🧑‍🏫"
         availability_emoji = "✅" if int(available_spots) > 0 else "❌"
 
         field_name = f"{course['type']} - {course['section']} {" (FULL)" if int(available_spots) == 0 else ""}"
-
 
         field_value = (
             f"#️⃣ **CRN:** {course['crn']}\n"
@@ -117,7 +113,25 @@ async def availability(
             f"⌚ **Meeting Times:** {course['meeting_time']}\n"
         )
 
+        # WHen index is odd (field 1, 3, 5, etc.), add a blank field to create a two-column layout
+        if idx % 2 == 1:
+            embed.add_field(name="\u200b", value="\u200b", inline=True)
+        
         embed.add_field(name=field_name, value=field_value, inline=True)
+    
+    # Add two blank fields if the number of courses is odd to maintain the two-column layout
+    if len(data) % 2 == 1:
+        embed.add_field(name="\u200b", value="\u200b", inline=True)
+        embed.add_field(name="\u200b", value="\u200b", inline=True)
+
+
+    link_field_value = (
+        f"[Course Search Link]({course_availability.url})\n"
+        # TODO: Add link to course calendar
+        # TODO: Add link to HEAT outline
+    )
+    embed.add_field(name="Links", value=link_field_value, inline=False)
+
     
     await interaction.followup.send(embed=embed)
 

@@ -12,21 +12,21 @@ class CourseAvailability():
         is_valid, error = self.__validate_fields()
         self.is_valid = is_valid
         self.error = error
-
-    async def get_availability(self):
-        url = COURSE_SEARCH_BASE.format(
+        self.url = COURSE_SEARCH_BASE.format(
             TERM=self.year+self.term,
             SUBJECT=self.subject,
             COURSE_NUMBER=self.course_number
         )
-        print(f"Fetching URL: {url}")
+
+    async def get_availability(self):
+        print(f"Fetching URL: {self.url}")
     
         data = []
         async with async_playwright() as p:
             browser = await p.chromium.launch(headless=True)  # Use headless mode
             page = await browser.new_page()
 
-            await page.goto(url, wait_until="commit")
+            await page.goto(self.url, wait_until="commit")
             await page.wait_for_selector("#table1")
 
             element = await page.query_selector("text=Please search again")
@@ -80,7 +80,7 @@ class CourseAvailability():
                     "campus": campus_text,
                     "instructional_method": instructional_method_text,
                     "meeting_time": meeting_time_text,
-                    "section_status": section_status_text.replace("LINKED", "").replace("FULL:", "").rstrip("\n").replace("\n", "").strip(),
+                    "section_status": section_status_text.replace("LINKED", "").replace("FULL:", "").rstrip("\n").replace("\n", " ").strip(),
                     "credits": credit_hours_text,
                 })
 
