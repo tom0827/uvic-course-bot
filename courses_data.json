@@ -1,15 +1,15 @@
 [
     {
-        "title": "Freshwater Ecosystems",
-        "subject": "BIOL",
-        "number": "346",
+        "title": "Computer Vision",
+        "subject": "ECE",
+        "number": "471",
         "section": "A01",
         "type": "Lecture",
-        "crn": 20362,
+        "crn": 20928,
         "campus": "Main (Gordon Head)",
         "instructional_method": "Face-to-face",
         "meeting_time": "Monday,Thursday\n10:00 AM - 11:20 AM\nStart Date: Jan 06, 2025\nEnd Date: Apr 04, 2025",
-        "section_status": "0 of 80 seats remain. 100 of 100 waitlist seats remain.",
+        "section_status": "10 of 48 seats remain. 50 of 50 waitlist seats remain.",
         "credits": "1.5"
     }
 ]
