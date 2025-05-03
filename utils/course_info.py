@@ -4,8 +4,10 @@ from constants import CATALOG_URL, DETAILS_BASE_URL
 
 class CourseInfo():
     """Class to get basic course info"""
-    def __init__(self, course: str):
-        self.course = course.upper()
+    def __init__(self, department: str, course_number: str):
+        self.department = department.upper()
+        self.course_number = course_number
+        self.course = f"{self.department}{self.course_number}"
         self.title = None
         self.pid = None
         self.description = None

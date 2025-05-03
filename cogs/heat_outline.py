@@ -15,19 +15,27 @@ class HeatOutlineCog(commands.Cog):
         description="Get heat outline for course"
     )
     @app_commands.describe(
-        course="Enter the course code (e.g., ECE471, CSC320)",
+        department="Enter the course department (e.g., ECE, CSC)",
+        course_number="Enter the course number (e.g., 471, 320)",
         term="Enter term (Fall, Spring, Summer)",
         year="Enter year (e.g. 2025)"
     )
-    async def heat(self, interaction: discord.Interaction, course: str, term: str, year: str):
-        heat_url = HeatUrl(course, term, year)
+    async def heat(
+        self,
+        interaction: discord.Interaction,
+        department: str,
+        course_number: str,
+        term: str,
+        year: str
+    ):
+        heat_url = HeatUrl(department, course_number, term, year)
         if not heat_url.is_valid:
             await interaction.response.send_message(heat_url.error)
             return
         
         embed = discord.Embed(
-            title=f"Course Outline ({course})",
-            description=f"{course} - {term} {year}",
+            title=f"Course Outline ({department} {course_number})",
+            description=f"{department} {course_number} - {term} {year}",
             color=discord.Color.blue()
         )
         

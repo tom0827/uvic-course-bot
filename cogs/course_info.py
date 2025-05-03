@@ -14,13 +14,16 @@ class CourseInfoCog(commands.Cog):
         name="info",
         description="Basic course info"
     )
-    @app_commands.describe(course="Enter the course code (e.g., ECE471, CSC320)")
-    async def info(self, interaction: discord.Interaction, course: str):
-        course_info = CourseInfo(course)
+    @app_commands.describe(
+        department="Enter the course department (e.g., ECE, CSC)",
+        course_number="Enter the course number (e.g., 471, 320)",
+    )
+    async def info(self, interaction: discord.Interaction, department: str, course_number: str):
+        course_info = CourseInfo(department, course_number)
         course_info.get_info()
 
         embed = discord.Embed(
-            title=f"Course Info ({course})",
+            title=f"Course Info ({department} {course_number})",
             description=course_info.title,
             color=discord.Color.blue()
         )

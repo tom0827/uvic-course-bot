@@ -15,7 +15,7 @@ class AvailabilityCog(commands.Cog):
         description="Find course availability"
     )
     @app_commands.describe(
-        subject="Enter the course subject (e.g., ECE, CSC)",
+        department="Enter the course department (e.g., ECE, CSC)",
         course_number="Enter the course number (e.g., 471, 320)",
         term="Enter term (Fall, Spring, Summer)",
         year="Enter year (e.g. 2025)"
@@ -23,19 +23,19 @@ class AvailabilityCog(commands.Cog):
     async def availability(
         self,
         interaction: discord.Interaction,
-        subject: str,
+        department: str,
         course_number: str,
         term: str,
         year: str
         ):
         await interaction.response.defer()
 
-        course_availability = CourseAvailability(subject, course_number, term, year)
+        course_availability = CourseAvailability(department, course_number, term, year)
         data = await course_availability.get_availability()
 
         embed = discord.Embed(
-            title=f"Course Information for {subject} {course_number} - {data[0]['title']}",
-            description=f"Description for {subject} {course_number}", # TODO: Add hyperlink to course description
+            title=f"Course Information for {department} {course_number} - {data[0]['title']}",
+            description=f"Description for {department} {course_number}", # TODO: Add hyperlink to course description
             timestamp=discord.utils.utcnow(),
             color=discord.Color.blue()
         )

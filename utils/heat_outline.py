@@ -1,8 +1,10 @@
 from constants import HEAT_BASE_URL, HeatTermEnum
 
 class HeatUrl():
-    def __init__(self, course: str, term: str, year: str):
-        self.course = course.upper()
+    def __init__(self, department: str, course_number, term: str, year: str):
+        self.department = department.upper()
+        self.course_number = course_number
+        self.course = f"{self.department}{self.course_number}"
         self.term = term
         self.year = year
         # validate fields
