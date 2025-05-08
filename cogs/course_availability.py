@@ -4,6 +4,7 @@ from discord import app_commands
 import os
 
 from utils.course_availability import CourseAvailability
+from utils.course_info import CourseInfo
 
 class AvailabilityCog(commands.Cog):
     def __init__(self, bot):
@@ -33,9 +34,12 @@ class AvailabilityCog(commands.Cog):
         course_availability = CourseAvailability(department, course_number, term, year)
         data = await course_availability.get_availability()
 
+        course_info = CourseInfo(department, course_number)
+        course_info.get_info()
+
         embed = discord.Embed(
             title=f"Course Information for {department} {course_number} - {data[0]['title']}",
-            description=f"Description for {department} {course_number}", # TODO: Add hyperlink to course description
+            description=course_info.description, # TODO: Add hyperlink to course description
             timestamp=discord.utils.utcnow(),
             color=discord.Color.blue()
         )
@@ -69,7 +73,7 @@ class AvailabilityCog(commands.Cog):
 
         link_field_value = (
             f"[Course Search Link]({course_availability.url})\n"
-            # TODO: Add link to course calendar
+            f"[Course Calendar Link]({course_info.get_course_calendar_link()})\n"
             # TODO: Add link to HEAT outline
         )
         embed.add_field(name="Links", value=link_field_value, inline=False)

@@ -1,6 +1,6 @@
 import requests
 
-from constants import CATALOG_URL, DETAILS_BASE_URL
+from constants import CATALOG_URL, COURSE_CALENDAR_BASE, DETAILS_BASE_URL
 
 class CourseInfo():
     """Class to get basic course info"""
@@ -40,6 +40,9 @@ class CourseInfo():
         details = details_response.json()
         self.description = self.__remove_html_tags(details.get('description'))
         self.pre_and_co_reqs = self.__remove_html_tags(details.get('preAndCorequisites'))
+
+    def get_course_calendar_link(self):
+        return COURSE_CALENDAR_BASE.format(PID=self.pid)
     
     def __remove_html_tags(self, text):
         from bs4 import BeautifulSoup
