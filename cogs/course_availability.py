@@ -3,6 +3,7 @@ from discord.ext import commands
 from discord import app_commands
 import os
 import time
+import logging
 
 from utils.course_availability import CourseAvailability
 from utils.course_info import CourseInfo
@@ -11,6 +12,7 @@ class AvailabilityCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.guild_id = int(os.getenv("GUILD_ID"))
+        self.logger = logging.getLogger(__name__)
 
     @app_commands.command(
         name="availability",
@@ -30,6 +32,7 @@ class AvailabilityCog(commands.Cog):
         term: str,
         year: str
         ):
+        self.logger.info(f"Received availability command: {department} {course_number} {term} {year}")
         start_time = time.time()
         await interaction.response.defer()
 

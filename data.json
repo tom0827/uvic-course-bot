@@ -1,0 +1,483 @@
+{
+  "success": true,
+  "totalCount": 5,
+  "data": 
+  [
+    {
+      "id": 260517,
+      "term": "202501",
+      "termDesc": "Second Term: Jan - Apr 2025",
+      "courseReferenceNumber": "20923",
+      "partOfTerm": "1",
+      "courseNumber": "455",
+      "subject": "ECE",
+      "subjectDescription": "Electrical &amp; Computer Engineer",
+      "sequenceNumber": "A01",
+      "campusDescription": "Online",
+      "scheduleTypeDescription": "Lecture",
+      "courseTitle": "Real Time Computer Systems Design Project",
+      "creditHours": 1.5,
+      "maximumEnrollment": 120,
+      "enrollment": 112,
+      "seatsAvailable": 8,
+      "waitCapacity": 50,
+      "waitCount": 0,
+      "waitAvailable": 50,
+      "crossList": null,
+      "crossListCapacity": null,
+      "crossListCount": null,
+      "crossListAvailable": null,
+      "creditHourHigh": 1.5,
+      "creditHourLow": 0,
+      "creditHourIndicator": "OR",
+      "openSection": true,
+      "linkIdentifier": "A1",
+      "isSectionLinked": true,
+      "subjectCourse": "ECE455",
+      "faculty": 
+      [
+      ],
+      "meetingsFaculty": 
+      [
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "20923",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": null,
+            "building": null,
+            "buildingDescription": null,
+            "campus": null,
+            "campusDescription": null,
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "20923",
+            "creditHourSession": 1.5,
+            "endDate": "Apr 04, 2025",
+            "endTime": null,
+            "friday": false,
+            "hoursWeek": 3.0,
+            "meetingScheduleType": "LEC",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": false,
+            "room": null,
+            "saturday": false,
+            "startDate": "Jan 06, 2025",
+            "sunday": false,
+            "term": "202501",
+            "thursday": false,
+            "tuesday": false,
+            "wednesday": false
+          },
+          "term": "202501"
+        }
+      ],
+      "reservedSeatSummary": null,
+      "sectionAttributes": null,
+      "instructionalMethod": "OL",
+      "instructionalMethodDescription": "Fully Online"
+    },
+    {
+      "id": 260518,
+      "term": "202501",
+      "termDesc": "Second Term: Jan - Apr 2025",
+      "courseReferenceNumber": "20924",
+      "partOfTerm": "1",
+      "courseNumber": "455",
+      "subject": "ECE",
+      "subjectDescription": "Electrical &amp; Computer Engineer",
+      "sequenceNumber": "B01",
+      "campusDescription": "Main (Gordon Head)",
+      "scheduleTypeDescription": "Lab",
+      "courseTitle": "Real Time Computer Systems Design Project",
+      "creditHours": 0,
+      "maximumEnrollment": 32,
+      "enrollment": 32,
+      "seatsAvailable": 0,
+      "waitCapacity": 3,
+      "waitCount": 0,
+      "waitAvailable": 3,
+      "crossList": null,
+      "crossListCapacity": null,
+      "crossListCount": null,
+      "crossListAvailable": null,
+      "creditHourHigh": 1.5,
+      "creditHourLow": 0,
+      "creditHourIndicator": "OR",
+      "openSection": true,
+      "linkIdentifier": "B1",
+      "isSectionLinked": true,
+      "subjectCourse": "ECE455",
+      "faculty": 
+      [
+      ],
+      "meetingsFaculty": 
+      [
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "20924",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": "1500",
+            "building": "214",
+            "buildingDescription": "None specified",
+            "campus": "M",
+            "campusDescription": "Main (Gordon Head)",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "20924",
+            "creditHourSession": 0.0,
+            "endDate": "Apr 04, 2025",
+            "endTime": "1750",
+            "friday": false,
+            "hoursWeek": 3.0,
+            "meetingScheduleType": "LAB",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": false,
+            "room": "None specified",
+            "saturday": false,
+            "startDate": "Jan 27, 2025",
+            "sunday": false,
+            "term": "202501",
+            "thursday": false,
+            "tuesday": true,
+            "wednesday": false
+          },
+          "term": "202501"
+        }
+      ],
+      "reservedSeatSummary": null,
+      "sectionAttributes": null,
+      "instructionalMethod": "F2F",
+      "instructionalMethodDescription": "Face-to-face"
+    },
+    {
+      "id": 260519,
+      "term": "202501",
+      "termDesc": "Second Term: Jan - Apr 2025",
+      "courseReferenceNumber": "20925",
+      "partOfTerm": "1",
+      "courseNumber": "455",
+      "subject": "ECE",
+      "subjectDescription": "Electrical &amp; Computer Engineer",
+      "sequenceNumber": "B02",
+      "campusDescription": "Main (Gordon Head)",
+      "scheduleTypeDescription": "Lab",
+      "courseTitle": "Real Time Computer Systems Design Project",
+      "creditHours": 0,
+      "maximumEnrollment": 32,
+      "enrollment": 29,
+      "seatsAvailable": 3,
+      "waitCapacity": 3,
+      "waitCount": 0,
+      "waitAvailable": 3,
+      "crossList": null,
+      "crossListCapacity": null,
+      "crossListCount": null,
+      "crossListAvailable": null,
+      "creditHourHigh": 1.5,
+      "creditHourLow": 0,
+      "creditHourIndicator": "OR",
+      "openSection": true,
+      "linkIdentifier": "B1",
+      "isSectionLinked": true,
+      "subjectCourse": "ECE455",
+      "faculty": 
+      [
+      ],
+      "meetingsFaculty": 
+      [
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "20925",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": "1430",
+            "building": "214",
+            "buildingDescription": "None specified",
+            "campus": "M",
+            "campusDescription": "Main (Gordon Head)",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "20925",
+            "creditHourSession": 0.0,
+            "endDate": "Apr 04, 2025",
+            "endTime": "1720",
+            "friday": false,
+            "hoursWeek": 3.0,
+            "meetingScheduleType": "LAB",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": false,
+            "room": "None specified",
+            "saturday": false,
+            "startDate": "Jan 27, 2025",
+            "sunday": false,
+            "term": "202501",
+            "thursday": false,
+            "tuesday": false,
+            "wednesday": true
+          },
+          "term": "202501"
+        }
+      ],
+      "reservedSeatSummary": null,
+      "sectionAttributes": null,
+      "instructionalMethod": "F2F",
+      "instructionalMethodDescription": "Face-to-face"
+    },
+    {
+      "id": 260520,
+      "term": "202501",
+      "termDesc": "Second Term: Jan - Apr 2025",
+      "courseReferenceNumber": "20926",
+      "partOfTerm": "1",
+      "courseNumber": "455",
+      "subject": "ECE",
+      "subjectDescription": "Electrical &amp; Computer Engineer",
+      "sequenceNumber": "B03",
+      "campusDescription": "Main (Gordon Head)",
+      "scheduleTypeDescription": "Lab",
+      "courseTitle": "Real Time Computer Systems Design Project",
+      "creditHours": 0,
+      "maximumEnrollment": 32,
+      "enrollment": 31,
+      "seatsAvailable": 1,
+      "waitCapacity": 3,
+      "waitCount": 0,
+      "waitAvailable": 3,
+      "crossList": null,
+      "crossListCapacity": null,
+      "crossListCount": null,
+      "crossListAvailable": null,
+      "creditHourHigh": 1.5,
+      "creditHourLow": 0,
+      "creditHourIndicator": "OR",
+      "openSection": true,
+      "linkIdentifier": "B1",
+      "isSectionLinked": true,
+      "subjectCourse": "ECE455",
+      "faculty": 
+      [
+      ],
+      "meetingsFaculty": 
+      [
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "20926",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": "1530",
+            "building": "214",
+            "buildingDescription": "None specified",
+            "campus": "M",
+            "campusDescription": "Main (Gordon Head)",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "20926",
+            "creditHourSession": 0.0,
+            "endDate": "Apr 04, 2025",
+            "endTime": "1820",
+            "friday": false,
+            "hoursWeek": 2.83,
+            "meetingScheduleType": "LAB",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": false,
+            "room": "None specified",
+            "saturday": false,
+            "startDate": "Jan 27, 2025",
+            "sunday": false,
+            "term": "202501",
+            "thursday": true,
+            "tuesday": false,
+            "wednesday": false
+          },
+          "term": "202501"
+        }
+      ],
+      "reservedSeatSummary": null,
+      "sectionAttributes": null,
+      "instructionalMethod": "F2F",
+      "instructionalMethodDescription": "Face-to-face"
+    },
+    {
+      "id": 267080,
+      "term": "202501",
+      "termDesc": "Second Term: Jan - Apr 2025",
+      "courseReferenceNumber": "24094",
+      "partOfTerm": "1",
+      "courseNumber": "455",
+      "subject": "ECE",
+      "subjectDescription": "Electrical &amp; Computer Engineer",
+      "sequenceNumber": "B04",
+      "campusDescription": "Main (Gordon Head)",
+      "scheduleTypeDescription": "Lab",
+      "courseTitle": "Real Time Computer Systems Design Project",
+      "creditHours": 0,
+      "maximumEnrollment": 30,
+      "enrollment": 20,
+      "seatsAvailable": 10,
+      "waitCapacity": 3,
+      "waitCount": 0,
+      "waitAvailable": 3,
+      "crossList": null,
+      "crossListCapacity": null,
+      "crossListCount": null,
+      "crossListAvailable": null,
+      "creditHourHigh": 1.5,
+      "creditHourLow": 0,
+      "creditHourIndicator": "OR",
+      "openSection": true,
+      "linkIdentifier": "B1",
+      "isSectionLinked": true,
+      "subjectCourse": "ECE455",
+      "faculty": 
+      [
+      ],
+      "meetingsFaculty": 
+      [
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "24094",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": "1430",
+            "building": "214",
+            "buildingDescription": "None specified",
+            "campus": "M",
+            "campusDescription": "Main (Gordon Head)",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "24094",
+            "creditHourSession": 0.0,
+            "endDate": "Apr 04, 2025",
+            "endTime": "1720",
+            "friday": false,
+            "hoursWeek": 2.83,
+            "meetingScheduleType": "LAB",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": true,
+            "room": "None specified",
+            "saturday": false,
+            "startDate": "Jan 27, 2025",
+            "sunday": false,
+            "term": "202501",
+            "thursday": false,
+            "tuesday": false,
+            "wednesday": false
+          },
+          "term": "202501"
+        }
+      ],
+      "reservedSeatSummary": null,
+      "sectionAttributes": null,
+      "instructionalMethod": "F2F",
+      "instructionalMethodDescription": "Face-to-face"
+    }
+  ],
+  "pageOffset": 0,
+  "pageMaxSize": 500,
+  "sectionsFetchedCount": 5,
+  "pathMode": "search",
+  "searchResultsConfigs": 
+  [
+    {
+      "config": "courseTitle",
+      "display": "Title",
+      "title": "Title",
+      "required": true,
+      "width": "9%"
+    },
+    {
+      "config": "subject",
+      "display": "Subject",
+      "title": "Subject",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "courseNumber",
+      "display": "Course Number",
+      "title": "Course Number",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "sequenceNumber",
+      "display": "Section",
+      "title": "Section",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "scheduleType",
+      "display": "Schedule Type",
+      "title": "Schedule Type",
+      "required": false,
+      "width": "5%"
+    },
+    {
+      "config": "creditHours",
+      "display": "Units",
+      "title": "Units",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "courseReferenceNumber",
+      "display": "CRN",
+      "title": "CRN",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "campus",
+      "display": "Campus",
+      "title": "Campus",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "instructionalMethod",
+      "display": "Delivery Mode",
+      "title": "Delivery Mode",
+      "required": false,
+      "width": "8%"
+    },
+    {
+      "config": "meetingTime",
+      "display": "Meeting Times",
+      "title": "Meeting Times",
+      "required": false,
+      "width": "15%"
+    },
+    {
+      "config": "status",
+      "display": "Section Status",
+      "title": "Section Status",
+      "required": false,
+      "width": "6%"
+    }
+  ],
+  "ztcEncodedImage": null,
+  "allowHoldRegistration": null
+}

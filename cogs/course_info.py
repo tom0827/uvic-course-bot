@@ -1,4 +1,5 @@
 import os
+import logging
 import discord
 from discord.ext import commands
 from discord import app_commands
@@ -9,6 +10,7 @@ class CourseInfoCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.guild_id = int(os.getenv("GUILD_ID"))
+        self.logger = logging.getLogger(__name__)
 
     @app_commands.command(
         name="info",
@@ -19,6 +21,7 @@ class CourseInfoCog(commands.Cog):
         course_number="Enter the course number (e.g., 471, 320)",
     )
     async def info(self, interaction: discord.Interaction, department: str, course_number: str):
+        self.logger.info(f"Received course info command: {department} {course_number}")
         await interaction.response.defer()
         course_info = CourseInfo(department, course_number)
         course_info.get_info()
