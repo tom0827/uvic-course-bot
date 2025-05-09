@@ -14,7 +14,6 @@ class CourseInfo():
         self.pre_and_co_reqs = None
 
     def get_info(self):
-        print("Getting course")
         catalog_response = requests.get(CATALOG_URL)
 
         if catalog_response.status_code != 200:

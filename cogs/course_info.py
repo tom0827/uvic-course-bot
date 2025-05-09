@@ -19,6 +19,7 @@ class CourseInfoCog(commands.Cog):
         course_number="Enter the course number (e.g., 471, 320)",
     )
     async def info(self, interaction: discord.Interaction, department: str, course_number: str):
+        await interaction.response.defer()
         course_info = CourseInfo(department, course_number)
         course_info.get_info()
 
@@ -33,7 +34,7 @@ class CourseInfoCog(commands.Cog):
         
         embed.set_footer(text="Course Information System")
         
-        await interaction.response.send_message(embed=embed)
+        await interaction.followup.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(CourseInfoCog(bot), guilds=[discord.Object(id=int(os.getenv("GUILD_ID")))])

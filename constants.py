@@ -13,6 +13,12 @@ COURSE_SEARCH_BASE = (
 
 COURSE_CALENDAR_BASE = 'https://www.uvic.ca/calendar/undergrad/#/courses/{PID}'
 
+URL_PREFIX = "https://banner.uvic.ca/StudentRegistrationSsb/ssb"
+
+COOKIE_LINK_BASE = '{PREFIX}/classSearch/classSearch?term={TERM}&txt_subject=CSUP&txt_courseNumber=000'
+
+DATA_LINK_BASE = '{PREFIX}/searchResults/searchResults?txt_term={TERM}&pageMaxSize=10000&txt_subject={SUBJECT}&txt_courseNumber={COURSE_NUMBER}'
+
 class HeatTermEnum(Enum):
     FALL = "091"
     SPRING = "011"

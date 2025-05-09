@@ -1,0 +1,399 @@
+{
+  "success": true,
+  "totalCount": 3,
+  "data": 
+  [
+    {
+      "id": 268401,
+      "term": "202505",
+      "termDesc": "Summer Session: May - Aug 2025",
+      "courseReferenceNumber": "30814",
+      "partOfTerm": "1",
+      "courseNumber": "499",
+      "subject": "SENG",
+      "subjectDescription": "Software Engineering",
+      "sequenceNumber": "A01",
+      "campusDescription": "Main (Gordon Head)",
+      "scheduleTypeDescription": "Lecture",
+      "courseTitle": "Design Project II",
+      "creditHours": 3,
+      "maximumEnrollment": 84,
+      "enrollment": 55,
+      "seatsAvailable": 29,
+      "waitCapacity": 50,
+      "waitCount": 0,
+      "waitAvailable": 50,
+      "crossList": null,
+      "crossListCapacity": null,
+      "crossListCount": null,
+      "crossListAvailable": null,
+      "creditHourHigh": 3,
+      "creditHourLow": 0,
+      "creditHourIndicator": "OR",
+      "openSection": true,
+      "linkIdentifier": "A1",
+      "isSectionLinked": true,
+      "subjectCourse": "SENG499",
+      "faculty": 
+      [
+      ],
+      "meetingsFaculty": 
+      [
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "30814",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": "1500",
+            "building": "115",
+            "buildingDescription": "None specified",
+            "campus": "M",
+            "campusDescription": "Main (Gordon Head)",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "30814",
+            "creditHourSession": 3.0,
+            "endDate": "Aug 01, 2025",
+            "endTime": "1620",
+            "friday": false,
+            "hoursWeek": 1.5,
+            "meetingScheduleType": "LEC",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": false,
+            "room": "None specified",
+            "saturday": false,
+            "startDate": "May 07, 2025",
+            "sunday": false,
+            "term": "202505",
+            "thursday": false,
+            "tuesday": false,
+            "wednesday": true
+          },
+          "term": "202505"
+        }
+      ],
+      "reservedSeatSummary": null,
+      "sectionAttributes": null,
+      "instructionalMethod": "F2F",
+      "instructionalMethodDescription": "Face-to-face"
+    },
+    {
+      "id": 269669,
+      "term": "202505",
+      "termDesc": "Summer Session: May - Aug 2025",
+      "courseReferenceNumber": "30815",
+      "partOfTerm": "1",
+      "courseNumber": "499",
+      "subject": "SENG",
+      "subjectDescription": "Software Engineering",
+      "sequenceNumber": "B01",
+      "campusDescription": "Main (Gordon Head)",
+      "scheduleTypeDescription": "Lab",
+      "courseTitle": "Design Project II",
+      "creditHours": 0,
+      "maximumEnrollment": 40,
+      "enrollment": 40,
+      "seatsAvailable": 0,
+      "waitCapacity": 5,
+      "waitCount": 1,
+      "waitAvailable": 4,
+      "crossList": null,
+      "crossListCapacity": null,
+      "crossListCount": null,
+      "crossListAvailable": null,
+      "creditHourHigh": 3,
+      "creditHourLow": 0,
+      "creditHourIndicator": "OR",
+      "openSection": true,
+      "linkIdentifier": "B1",
+      "isSectionLinked": true,
+      "subjectCourse": "SENG499",
+      "faculty": 
+      [
+      ],
+      "meetingsFaculty": 
+      [
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "30815",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": "1600",
+            "building": "214",
+            "buildingDescription": "None specified",
+            "campus": "M",
+            "campusDescription": "Main (Gordon Head)",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "30815",
+            "creditHourSession": 0.0,
+            "endDate": "Aug 01, 2025",
+            "endTime": "1850",
+            "friday": false,
+            "hoursWeek": 3.0,
+            "meetingScheduleType": "LAB",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": false,
+            "room": "None specified",
+            "saturday": false,
+            "startDate": "May 12, 2025",
+            "sunday": false,
+            "term": "202505",
+            "thursday": true,
+            "tuesday": false,
+            "wednesday": false
+          },
+          "term": "202505"
+        },
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "30815",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": "1630",
+            "building": "214",
+            "buildingDescription": "None specified",
+            "campus": "M",
+            "campusDescription": "Main (Gordon Head)",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "30815",
+            "creditHourSession": 0.0,
+            "endDate": "Aug 01, 2025",
+            "endTime": "1920",
+            "friday": false,
+            "hoursWeek": 3.0,
+            "meetingScheduleType": "LAB",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": false,
+            "room": "None specified",
+            "saturday": false,
+            "startDate": "May 12, 2025",
+            "sunday": false,
+            "term": "202505",
+            "thursday": false,
+            "tuesday": true,
+            "wednesday": false
+          },
+          "term": "202505"
+        }
+      ],
+      "reservedSeatSummary": null,
+      "sectionAttributes": null,
+      "instructionalMethod": "F2F",
+      "instructionalMethodDescription": "Face-to-face"
+    },
+    {
+      "id": 269778,
+      "term": "202505",
+      "termDesc": "Summer Session: May - Aug 2025",
+      "courseReferenceNumber": "30816",
+      "partOfTerm": "1",
+      "courseNumber": "499",
+      "subject": "SENG",
+      "subjectDescription": "Software Engineering",
+      "sequenceNumber": "B02",
+      "campusDescription": "Main (Gordon Head)",
+      "scheduleTypeDescription": "Lab",
+      "courseTitle": "Design Project II",
+      "creditHours": 0,
+      "maximumEnrollment": 40,
+      "enrollment": 14,
+      "seatsAvailable": 26,
+      "waitCapacity": 5,
+      "waitCount": 0,
+      "waitAvailable": 5,
+      "crossList": null,
+      "crossListCapacity": null,
+      "crossListCount": null,
+      "crossListAvailable": null,
+      "creditHourHigh": 3,
+      "creditHourLow": 0,
+      "creditHourIndicator": "OR",
+      "openSection": true,
+      "linkIdentifier": "B1",
+      "isSectionLinked": true,
+      "subjectCourse": "SENG499",
+      "faculty": 
+      [
+      ],
+      "meetingsFaculty": 
+      [
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "30816",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": "1600",
+            "building": "214",
+            "buildingDescription": "None specified",
+            "campus": "M",
+            "campusDescription": "Main (Gordon Head)",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "30816",
+            "creditHourSession": 0.0,
+            "endDate": "Aug 01, 2025",
+            "endTime": "1850",
+            "friday": false,
+            "hoursWeek": 3.0,
+            "meetingScheduleType": "LAB",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": false,
+            "room": "None specified",
+            "saturday": false,
+            "startDate": "May 12, 2025",
+            "sunday": false,
+            "term": "202505",
+            "thursday": true,
+            "tuesday": false,
+            "wednesday": false
+          },
+          "term": "202505"
+        },
+        {
+          "category": "01",
+          "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+          "courseReferenceNumber": "30816",
+          "faculty": 
+          [
+          ],
+          "meetingTime": {
+            "beginTime": "1630",
+            "building": "214",
+            "buildingDescription": "None specified",
+            "campus": "M",
+            "campusDescription": "Main (Gordon Head)",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "30816",
+            "creditHourSession": 0.0,
+            "endDate": "Aug 01, 2025",
+            "endTime": "1920",
+            "friday": false,
+            "hoursWeek": 3.0,
+            "meetingScheduleType": "LAB",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Every Week",
+            "monday": false,
+            "room": "None specified",
+            "saturday": false,
+            "startDate": "May 12, 2025",
+            "sunday": false,
+            "term": "202505",
+            "thursday": false,
+            "tuesday": true,
+            "wednesday": false
+          },
+          "term": "202505"
+        }
+      ],
+      "reservedSeatSummary": null,
+      "sectionAttributes": null,
+      "instructionalMethod": "F2F",
+      "instructionalMethodDescription": "Face-to-face"
+    }
+  ],
+  "pageOffset": 0,
+  "pageMaxSize": 500,
+  "sectionsFetchedCount": 3,
+  "pathMode": "search",
+  "searchResultsConfigs": 
+  [
+    {
+      "config": "courseTitle",
+      "display": "Title",
+      "title": "Title",
+      "required": true,
+      "width": "9%"
+    },
+    {
+      "config": "subject",
+      "display": "Subject",
+      "title": "Subject",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "courseNumber",
+      "display": "Course Number",
+      "title": "Course Number",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "sequenceNumber",
+      "display": "Section",
+      "title": "Section",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "scheduleType",
+      "display": "Schedule Type",
+      "title": "Schedule Type",
+      "required": false,
+      "width": "5%"
+    },
+    {
+      "config": "creditHours",
+      "display": "Units",
+      "title": "Units",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "courseReferenceNumber",
+      "display": "CRN",
+      "title": "CRN",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "campus",
+      "display": "Campus",
+      "title": "Campus",
+      "required": false,
+      "width": "3%"
+    },
+    {
+      "config": "instructionalMethod",
+      "display": "Delivery Mode",
+      "title": "Delivery Mode",
+      "required": false,
+      "width": "8%"
+    },
+    {
+      "config": "meetingTime",
+      "display": "Meeting Times",
+      "title": "Meeting Times",
+      "required": false,
+      "width": "15%"
+    },
+    {
+      "config": "status",
+      "display": "Section Status",
+      "title": "Section Status",
+      "required": false,
+      "width": "6%"
+    }
+  ],
+  "ztcEncodedImage": null,
+  "allowHoldRegistration": null
+}

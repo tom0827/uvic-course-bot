@@ -28,6 +28,7 @@ class HeatOutlineCog(commands.Cog):
         term: str,
         year: str
     ):
+        await interaction.response.defer()
         heat_url = HeatUrl(department, course_number, term, year)
         if not heat_url.is_valid:
             await interaction.response.send_message(heat_url.error)
@@ -42,7 +43,7 @@ class HeatOutlineCog(commands.Cog):
         link = heat_url.get_link()
         embed.add_field(name="Link", value=link, inline=False)
         
-        await interaction.response.send_message(embed=embed)
+        await interaction.followup.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(HeatOutlineCog(bot), guilds=[discord.Object(id=int(os.getenv("GUILD_ID")))])
