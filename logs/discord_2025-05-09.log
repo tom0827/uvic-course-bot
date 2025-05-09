@@ -1,193 +1,106 @@
-2025-05-09 21:23:29,227 - discord.ext.commands.bot - WARNING - Privileged message content intent is missing, commands may not work as expected.
-2025-05-09 21:23:29,324 - root - INFO - Loaded cog: course_availability.py
-2025-05-09 21:23:29,342 - root - INFO - Loaded cog: heat_outline.py
-2025-05-09 21:23:29,349 - root - INFO - Loaded cog: course_info.py
-2025-05-09 21:23:29,349 - discord.client - INFO - logging in using static token
-2025-05-09 21:23:30,517 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 937bfe9406b80750d6bbe5304f30b3a5).
-2025-05-09 21:23:32,522 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
-2025-05-09 21:24:04,744 - discord.gateway - INFO - Shard ID None has successfully RESUMED session 937bfe9406b80750d6bbe5304f30b3a5.
-2025-05-09 21:24:20,074 - root - INFO - Loaded cog: course_availability.py
-2025-05-09 21:24:20,076 - root - INFO - Loaded cog: heat_outline.py
-2025-05-09 21:24:20,077 - root - INFO - Loaded cog: course_info.py
-2025-05-09 21:24:20,077 - discord.client - INFO - logging in using static token
-2025-05-09 21:24:21,032 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 9c3106f1eca1dd50090db1041e2f220d).
-2025-05-09 21:24:23,036 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
-2025-05-09 21:28:24,217 - discord.gateway - INFO - Shard ID None has successfully RESUMED session 9c3106f1eca1dd50090db1041e2f220d.
-2025-05-09 22:40:34,283 - discord.client - ERROR - Attempting a reconnect in 1.02s
+2025-05-09 23:33:21,258 - root - INFO - Loaded cog: course_availability.py
+2025-05-09 23:33:21,262 - root - INFO - Loaded cog: heat_outline.py
+2025-05-09 23:33:21,264 - root - INFO - Loaded cog: course_info.py
+2025-05-09 23:33:21,264 - discord.client - INFO - logging in using static token
+2025-05-09 23:33:22,609 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 08984610d5d6a08c42e49d4fde045f52).
+2025-05-09 23:33:24,614 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
+2025-05-09 23:33:48,390 - cogs.heat_outline - INFO - Received heat outline command: ECE 455 011 2025
+2025-05-09 23:33:48,721 - discord.app_commands.tree - ERROR - Ignoring exception in command 'heat'
 Traceback (most recent call last):
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1365, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 995, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1026, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/resolver.py", line 39, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 905, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/socket.py", line 978, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno -2] Name or service not known
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/commands.py", line 857, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/cogs/heat_outline.py", line 50, in heat
+    await interaction.response.send_message(heat_url.error)
+  File "/usr/local/lib/python3.12/site-packages/discord/interactions.py", line 976, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/usr/local/lib/python3.12/site-packages/discord/client.py", line 701, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/discord/gateway.py", line 375, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/discord/http.py", line 554, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/client.py", line 1004, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/client.py", line 703, in _request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 548, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1056, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1371, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-d.discord.gg:443 ssl:default [Name or service not known]
-2025-05-09 22:40:35,319 - discord.client - ERROR - Attempting a reconnect in 0.82s
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/tree.py", line 1310, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/commands.py", line 883, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/commands.py", line 876, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'heat' raised an exception: InteractionResponded: This interaction has already been responded to before
+2025-05-09 23:34:44,695 - root - INFO - Loaded cog: course_availability.py
+2025-05-09 23:34:44,699 - root - INFO - Loaded cog: heat_outline.py
+2025-05-09 23:34:44,700 - root - INFO - Loaded cog: course_info.py
+2025-05-09 23:34:44,701 - discord.client - INFO - logging in using static token
+2025-05-09 23:34:45,828 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 6a7302af98359936b3922bc434a1ad8c).
+2025-05-09 23:34:47,833 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
+2025-05-09 23:34:52,945 - cogs.heat_outline - INFO - Received heat outline command: ECE 455 011 2025
+2025-05-09 23:34:53,235 - discord.app_commands.tree - ERROR - Ignoring exception in command 'heat'
 Traceback (most recent call last):
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1365, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 995, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1026, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/resolver.py", line 39, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 905, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/socket.py", line 978, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno -2] Name or service not known
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/commands.py", line 857, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/cogs/heat_outline.py", line 49, in heat
+    if not heat_url.is_valid:
+           ^^^^^^^^^^^^^^^^^
+AttributeError: 'HeatUrl' object has no attribute 'is_valid'
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/usr/local/lib/python3.12/site-packages/discord/client.py", line 701, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/discord/gateway.py", line 375, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/discord/http.py", line 554, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/client.py", line 1004, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/client.py", line 703, in _request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 548, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1056, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1371, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-d.discord.gg:443 ssl:default [Name or service not known]
-2025-05-09 22:40:36,148 - discord.client - ERROR - Attempting a reconnect in 2.24s
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/tree.py", line 1310, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/commands.py", line 883, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/commands.py", line 876, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'heat' raised an exception: AttributeError: 'HeatUrl' object has no attribute 'is_valid'
+2025-05-09 23:35:28,362 - root - INFO - Loaded cog: course_availability.py
+2025-05-09 23:35:28,365 - root - INFO - Loaded cog: heat_outline.py
+2025-05-09 23:35:28,367 - root - INFO - Loaded cog: course_info.py
+2025-05-09 23:35:28,367 - discord.client - INFO - logging in using static token
+2025-05-09 23:35:29,340 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 930d5c1d696b7f28fb9e72b723be3162).
+2025-05-09 23:35:31,345 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
+2025-05-09 23:35:32,024 - cogs.heat_outline - INFO - Received heat outline command: ECE 455 011 2025
+2025-05-09 23:35:32,284 - discord.app_commands.tree - ERROR - Ignoring exception in command 'heat'
 Traceback (most recent call last):
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1365, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 995, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1026, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/resolver.py", line 39, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 905, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/socket.py", line 978, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno -2] Name or service not known
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/commands.py", line 857, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/cogs/heat_outline.py", line 49, in heat
+    if not heat_url.is_valid:
+           ^^^^^^^^^^^^^^^^^
+AttributeError: 'HeatUrl' object has no attribute 'is_valid'
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/usr/local/lib/python3.12/site-packages/discord/client.py", line 701, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/discord/gateway.py", line 375, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/discord/http.py", line 554, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/client.py", line 1004, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/client.py", line 703, in _request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 548, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1056, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/aiohttp/connector.py", line 1371, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-d.discord.gg:443 ssl:default [Name or service not known]
-2025-05-09 22:40:38,774 - discord.gateway - INFO - Shard ID None session has been invalidated.
-2025-05-09 22:40:44,490 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: dc2b3f6d6163e9a3b50f3655a7385d14).
-2025-05-09 22:40:46,494 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
-2025-05-09 22:42:53,163 - root - INFO - Loaded cog: course_availability.py
-2025-05-09 22:42:53,166 - root - INFO - Loaded cog: heat_outline.py
-2025-05-09 22:42:53,167 - root - INFO - Loaded cog: course_info.py
-2025-05-09 22:42:53,168 - discord.client - INFO - logging in using static token
-2025-05-09 22:42:54,632 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: a9885e44b215bb46a3ebacde65256028).
-2025-05-09 22:42:56,637 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
-2025-05-09 22:43:35,651 - cogs.course_availability - INFO - Received availability command: ECE 455 spring 2025
-2025-05-09 22:44:02,830 - cogs.course_info - INFO - Received course info command: CSC 305
-2025-05-09 22:44:24,949 - cogs.heat_outline - INFO - Received heat outline command: ECE 471 spring 2025
-2025-05-09 23:02:12,484 - discord.gateway - INFO - Shard ID None has successfully RESUMED session a9885e44b215bb46a3ebacde65256028.
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/tree.py", line 1310, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/commands.py", line 883, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/discord/app_commands/commands.py", line 876, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'heat' raised an exception: AttributeError: 'HeatUrl' object has no attribute 'is_valid'
+2025-05-09 23:36:36,287 - root - INFO - Loaded cog: course_availability.py
+2025-05-09 23:36:36,291 - root - INFO - Loaded cog: heat_outline.py
+2025-05-09 23:36:36,293 - root - INFO - Loaded cog: course_info.py
+2025-05-09 23:36:36,293 - discord.client - INFO - logging in using static token
+2025-05-09 23:36:37,371 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: e1e1970a961415fdb5d5232c7024acc3).
+2025-05-09 23:36:39,377 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
+2025-05-09 23:36:39,661 - cogs.heat_outline - INFO - Received heat outline command: ECE 455 011 2025
+2025-05-09 23:43:00,083 - root - INFO - Loaded cog: course_availability.py
+2025-05-09 23:43:00,087 - root - INFO - Loaded cog: heat_outline.py
+2025-05-09 23:43:00,088 - root - INFO - Loaded cog: course_info.py
+2025-05-09 23:43:00,089 - discord.client - INFO - logging in using static token
+2025-05-09 23:43:01,493 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 575663847831c00dfa1242675efeb48d).
+2025-05-09 23:43:03,499 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
+2025-05-09 23:43:04,310 - cogs.heat_outline - INFO - Received heat outline command: ECE 455 011 2025
+2025-05-09 23:45:15,594 - root - INFO - Loaded cog: course_availability.py
+2025-05-09 23:45:15,598 - root - INFO - Loaded cog: heat_outline.py
+2025-05-09 23:45:15,599 - root - INFO - Loaded cog: course_info.py
+2025-05-09 23:45:15,599 - discord.client - INFO - logging in using static token
+2025-05-09 23:45:17,079 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 7c5120518237f2d335eed66a97bcb297).
+2025-05-09 23:45:19,085 - root - INFO - Bot is logged in as UVIC Course Info Test (1370471918859190403)
+2025-05-09 23:45:22,105 - cogs.heat_outline - INFO - Received heat outline command: ECE 455 011 2025

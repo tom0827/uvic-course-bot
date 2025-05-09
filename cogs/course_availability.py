@@ -24,6 +24,19 @@ class AvailabilityCog(commands.Cog):
         term="Enter term (Fall, Spring, Summer)",
         year="Enter year (e.g. 2025)"
     )
+    @app_commands.choices(
+        term=[
+            app_commands.Choice(name="Fall", value="09"),
+            app_commands.Choice(name="Spring", value="01"),
+            app_commands.Choice(name="Summer", value="05")
+        ],
+        year=[
+            app_commands.Choice(name="2022", value="2022"),
+            app_commands.Choice(name="2023", value="2023"),
+            app_commands.Choice(name="2024", value="2024"),
+            app_commands.Choice(name="2025", value="2025"),
+        ]
+    )
     async def availability(
         self,
         interaction: discord.Interaction,

@@ -1,6 +1,6 @@
 import json
 import requests
-from constants import COOKIE_LINK_BASE, COURSE_SEARCH_BASE, DATA_LINK_BASE, URL_PREFIX, CourseSearchTermEnum
+from constants import COOKIE_LINK_BASE, COURSE_SEARCH_BASE, DATA_LINK_BASE, URL_PREFIX
 from playwright.async_api import async_playwright
 import os
 
@@ -10,9 +10,6 @@ class CourseAvailability():
         self.course_number = course_number
         self.term = term
         self.year = year
-        is_valid, error = self.__validate_fields()
-        self.is_valid = is_valid
-        self.error = error
         self.url = COURSE_SEARCH_BASE.format(
             TERM=self.year+self.term,
             SUBJECT=self.subject,
@@ -36,15 +33,4 @@ class CourseAvailability():
         )
 
         data_response = session.get(data_link)
-        file_path = "data.json"
-        with open(file_path, 'w') as file:
-            file.write(data_response.text)
         return json.loads(data_response.text)
-        
-    def __validate_fields(self):
-        if self.term.upper() not in CourseSearchTermEnum.__members__:
-            error = f"Invalid term: {self.term}."
-            return False, error
-        else:
-            self.term = CourseSearchTermEnum[self.term.upper()].value
-        return True, None

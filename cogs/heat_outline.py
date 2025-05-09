@@ -4,6 +4,7 @@ from discord import app_commands
 import os
 import logging
 
+from constants import HeatTermEnum
 from utils.heat_outline import HeatUrl
 
 class HeatOutlineCog(commands.Cog):
@@ -22,6 +23,19 @@ class HeatOutlineCog(commands.Cog):
         term="Enter term (Fall, Spring, Summer)",
         year="Enter year (e.g. 2025)"
     )
+    @app_commands.choices(
+        term=[
+            app_commands.Choice(name="Fall", value="091"),
+            app_commands.Choice(name="Spring", value="011"),
+            app_commands.Choice(name="Summer", value="051")
+        ],
+        year=[
+            app_commands.Choice(name="2022", value="2022"),
+            app_commands.Choice(name="2023", value="2023"),
+            app_commands.Choice(name="2024", value="2024"),
+            app_commands.Choice(name="2025", value="2025"),
+        ]
+    )
     async def heat(
         self,
         interaction: discord.Interaction,
@@ -33,13 +47,10 @@ class HeatOutlineCog(commands.Cog):
         self.logger.info(f"Received heat outline command: {department} {course_number} {term} {year}")
         await interaction.response.defer()
         heat_url = HeatUrl(department, course_number, term, year)
-        if not heat_url.is_valid:
-            await interaction.response.send_message(heat_url.error)
-            return
         
         embed = discord.Embed(
             title=f"Course Outline ({department} {course_number})",
-            description=f"{department} {course_number} - {term} {year}",
+            description=f"{department} {course_number} - {self.get_term_name(term)} {year}",
             color=discord.Color.blue()
         )
         
@@ -47,6 +58,16 @@ class HeatOutlineCog(commands.Cog):
         embed.add_field(name="Link", value=link, inline=False)
         
         await interaction.followup.send(embed=embed)
+
+    def get_term_name(self, term):
+        if term == HeatTermEnum.SPRING.value:
+            return "Spring"
+        elif term == HeatTermEnum.FALL.value:
+            return "Fall"
+        elif term == HeatTermEnum.SUMMER.value:
+            return "Summer"
+        else:
+            return "Unknown"
 
 async def setup(bot):
     await bot.add_cog(HeatOutlineCog(bot), guilds=[discord.Object(id=int(os.getenv("GUILD_ID")))])

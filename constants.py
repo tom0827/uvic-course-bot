@@ -4,7 +4,7 @@ CATALOG_URL = 'https://uvic.kuali.co/api/v1/catalog/courses/5f21b66d95f09c001ac4
 
 DETAILS_BASE_URL = 'https://uvic.kuali.co/api/v1/catalog/course/5d9ccc4eab7506001ae4c225'
 
-HEAT_BASE_URL = 'https://heat.csc.uvic.ca/coview/course/<TERM>/<COURSE>'
+HEAT_BASE_URL = 'https://heat.csc.uvic.ca/coview/course/{TERM}/{COURSE}'
 
 COURSE_SEARCH_BASE = (
     'https://banner.uvic.ca/StudentRegistrationSsb/ssb/classSearch/classSearch?'
@@ -20,11 +20,6 @@ COOKIE_LINK_BASE = '{PREFIX}/classSearch/classSearch?term={TERM}&txt_subject=CSU
 DATA_LINK_BASE = '{PREFIX}/searchResults/searchResults?txt_term={TERM}&pageMaxSize=10000&txt_subject={SUBJECT}&txt_courseNumber={COURSE_NUMBER}'
 
 class HeatTermEnum(Enum):
-    FALL = "091"
     SPRING = "011"
+    FALL = "091"
     SUMMER = "051"
-
-class CourseSearchTermEnum(Enum):
-    FALL = "09"
-    SPRING = "01"
-    SUMMER = "05"
