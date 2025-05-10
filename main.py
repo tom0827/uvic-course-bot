@@ -7,7 +7,8 @@ import logging
 import datetime
 
 load_dotenv()
-GUILD_ID = os.getenv("GUILD_ID")
+guild_id_str = os.getenv("GUILD_IDS")
+GUILD_IDS = [int(guild_id.strip()) for guild_id in guild_id_str.split(",")]
 TOKEN = os.getenv("TOKEN")
 
 def setup_logging():
@@ -54,7 +55,9 @@ async def load_extensions():
 @bot.event
 async def on_ready():
     logger.info(f'Bot is logged in as {bot.user.name} ({bot.user.id})')
-    await bot.tree.sync(guild=discord.Object(id=GUILD_ID))
+    for guild_id in GUILD_IDS:
+        await bot.tree.sync(guild=discord.Object(id=guild_id))
+        logger.info(f'Synced commands to guild ID: {guild_id}')
 
 # Run the bot
 async def main():

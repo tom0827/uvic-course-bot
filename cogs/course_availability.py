@@ -11,7 +11,6 @@ from utils.course_info import CourseInfo
 class AvailabilityCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.guild_id = int(os.getenv("GUILD_ID"))
         self.logger = logging.getLogger(__name__)
 
     @app_commands.command(
@@ -135,4 +134,7 @@ class AvailabilityCog(commands.Cog):
         return f"{hours}:{minutes:02d} {period}"
 
 async def setup(bot):
-    await bot.add_cog(AvailabilityCog(bot), guilds=[discord.Object(id=int(os.getenv("GUILD_ID")))])
+    guild_id_str = os.getenv("GUILD_IDS")
+    ids = [int(guild_id.strip()) for guild_id in guild_id_str.split(",")]
+    guild_objects = [discord.Object(id=guild_id) for guild_id in ids]
+    await bot.add_cog(AvailabilityCog(bot), guilds=guild_objects)
