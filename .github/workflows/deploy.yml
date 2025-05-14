@@ -41,12 +41,12 @@ jobs:
         chmod 600 ssh_key
 
         ssh -i ssh_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << EOF
-          docker pull ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
-          docker stop uvic-course-bot || true
-          docker rm uvic-course-bot || true
-          docker run -d \
-            --name uvic-course-bot \
-            --restart always \
-            -e DISCORD_TOKEN=$DISCORD_TOKEN \
-            -e API_KEY=$API_KEY \
-            ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
+        sudo docker pull ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
+        sudo docker stop uvic-course-bot || true
+        sudo docker rm uvic-course-bot || true
+        sudo docker run -d \
+          --name uvic-course-bot \
+          --restart always \
+          -e DISCORD_TOKEN=$DISCORD_TOKEN \
+          -e API_KEY=$API_KEY \
+          ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
