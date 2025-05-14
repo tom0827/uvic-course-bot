@@ -47,5 +47,6 @@ jobs:
         sudo docker run -d \
           --name uvic-course-bot \
           --restart always \
-          --env-file .env \
+          -e DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}\
+          -e GUILD_IDS=${{ secrets.GUILD_IDS }} \
           ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
