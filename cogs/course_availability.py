@@ -72,12 +72,23 @@ class AvailabilityCog(commands.Cog):
 
             meeting_time_data = section['meetingsFaculty'][0]['meetingTime']
 
-            days_of_week = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+            days_of_week = {
+                "sunday": "S",
+                "monday": "M",
+                "tuesday": "Tu",
+                "wednesday": "W",
+                "thursday": "Th",
+                "friday": "F",
+                "saturday": "S"
+            }
+
             days = ""
 
-            for day in days_of_week:
+            for day in days_of_week.keys():
                 if meeting_time_data[day]:
-                    days += day.capitalize() + "\n"
+                    if len(days):
+                        days += ", "
+                    days += days_of_week[day]
 
             field_value = (
                 f"#️⃣ **CRN:** {section['courseReferenceNumber']}\n"
@@ -85,9 +96,9 @@ class AvailabilityCog(commands.Cog):
                 f"{method_emoji} **Delivery:** {section['instructionalMethodDescription']}\n"
                 f"📍 **Campus:** {section['campusDescription']}\n"
                 f"⌚ **Meeting Times:** {meeting_time_data['meetingTypeDescription']}\n"
-                f"{days}"
                 f"{self.convert_to_12_hour_format(meeting_time_data['beginTime'])} - "
                 f"{self.convert_to_12_hour_format(meeting_time_data['endTime'])}\n"
+                f"{days}\n"
                 f"📅 **Duration** {meeting_time_data['startDate']} - "
                 f"{meeting_time_data['endDate']}\n"
             )

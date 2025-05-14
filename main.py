@@ -9,7 +9,7 @@ import datetime
 load_dotenv()
 guild_id_str = os.getenv("GUILD_IDS")
 GUILD_IDS = [int(guild_id.strip()) for guild_id in guild_id_str.split(",")]
-TOKEN = os.getenv("TOKEN")
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 def setup_logging():
     # Create logs directory if it doesn't exist
@@ -63,7 +63,7 @@ async def on_ready():
 async def main():
     async with bot:
         await load_extensions()
-        await bot.start(TOKEN)
+        await bot.start(DISCORD_TOKEN)
 
 if __name__ == "__main__":
     import asyncio

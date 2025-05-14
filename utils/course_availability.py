@@ -2,7 +2,6 @@ import json
 import requests
 from constants import COOKIE_LINK_BASE, COURSE_SEARCH_BASE, DATA_LINK_BASE, URL_PREFIX
 from playwright.async_api import async_playwright
-import os
 
 class CourseAvailability():
     def __init__(self, subject: str, course_number: str, term: str, year: str):
