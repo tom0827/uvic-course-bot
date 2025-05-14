@@ -23,3 +23,12 @@ class HeatTermEnum(Enum):
     SPRING = "011"
     FALL = "091"
     SUMMER = "051"
+
+class DaysOfWeekEnum(Enum):
+    SUNDAY = "S"
+    MONDAY = "M"
+    TUESDAY = "Tu"
+    WEDNESDAY = "W"
+    THURSDAY = "Th"
+    FRIDAY = "F"
+    SATURDAY = "S"

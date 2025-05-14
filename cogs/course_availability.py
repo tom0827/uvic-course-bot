@@ -7,6 +7,8 @@ import logging
 
 from utils.course_availability import CourseAvailability
 from utils.course_info import CourseInfo
+from constants import DaysOfWeekEnum
+
 
 class AvailabilityCog(commands.Cog):
     def __init__(self, bot):
@@ -70,37 +72,33 @@ class AvailabilityCog(commands.Cog):
 
             field_name = f"{section['scheduleTypeDescription']} - {section['sequenceNumber']} {" (FULL)" if int(available_spots) == 0 else ""}"
 
-            meeting_time_data = section['meetingsFaculty'][0]['meetingTime']
+            section_data = section['meetingsFaculty'][0]['meetingTime']
 
-            days_of_week = {
-                "sunday": "S",
-                "monday": "M",
-                "tuesday": "Tu",
-                "wednesday": "W",
-                "thursday": "Th",
-                "friday": "F",
-                "saturday": "S"
-            }
+            meeting_time_string = f"{section_data['meetingTypeDescription']}\n"
 
-            days = ""
+            for s in section['meetingsFaculty']:
+                meeting_time_data = s['meetingTime']
+                days = ""
+                for day in DaysOfWeekEnum:
+                    if meeting_time_data[day.name.lower()]:  # Convert enum name to lowercase to match dictionary keys
+                        if len(days):
+                            days += ", "
+                        days += day.value
+                if not days:
+                    continue
+                meeting_time_string += days + ": "
+                meeting_time_string += self.convert_to_12_hour_format(meeting_time_data['beginTime']) + " - "
+                meeting_time_string += self.convert_to_12_hour_format(meeting_time_data['endTime']) + "\n"
 
-            for day in days_of_week.keys():
-                if meeting_time_data[day]:
-                    if len(days):
-                        days += ", "
-                    days += days_of_week[day]
 
             field_value = (
                 f"#️⃣ **CRN:** {section['courseReferenceNumber']}\n"
                 f"{availability_emoji} **Status:** {section['seatsAvailable']} seats available\n"
                 f"{method_emoji} **Delivery:** {section['instructionalMethodDescription']}\n"
                 f"📍 **Campus:** {section['campusDescription']}\n"
-                f"⌚ **Meeting Times:** {meeting_time_data['meetingTypeDescription']}\n"
-                f"{self.convert_to_12_hour_format(meeting_time_data['beginTime'])} - "
-                f"{self.convert_to_12_hour_format(meeting_time_data['endTime'])}\n"
-                f"{days}\n"
-                f"📅 **Duration** {meeting_time_data['startDate']} - "
-                f"{meeting_time_data['endDate']}\n"
+                f"⌚ **Meeting Times:** {meeting_time_string}"
+                f"📅 **Duration** {section_data['startDate']} - "
+                f"{section_data['endDate']}\n"
             )
 
             # When index is odd (field 1, 3, 5, etc.), add a blank field to create a two-column layout
