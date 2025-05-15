@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for Python Discord Bot
+name: Deploy
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
         sudo docker pull ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
         sudo docker stop uvic-course-bot || true
         sudo docker rm uvic-course-bot || true
-        sudo docker run --env-file .env -d \
+        sudo docker run --env-file /home/ubuntu/uvic-course-bot/.env -d \
           --name uvic-course-bot \
           --restart always \
           ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
