@@ -42,7 +42,7 @@ jobs:
         sudo docker pull ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
         sudo docker stop uvic-course-bot || true
         sudo docker rm uvic-course-bot || true
-        sudo docker run -d \
+        sudo docker run --env-file .env -d \
           --name uvic-course-bot \
           --restart always \
           ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
