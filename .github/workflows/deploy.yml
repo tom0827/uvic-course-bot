@@ -34,8 +34,6 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         VPS_HOST: ${{ secrets.VPS_HOST }}
         VPS_USER: ${{ secrets.VPS_USER }}
-        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        API_KEY: ${{ secrets.API_KEY }}
       run: |
         echo "$SSH_PRIVATE_KEY" > ssh_key
         chmod 600 ssh_key
@@ -47,6 +45,4 @@ jobs:
         sudo docker run -d \
           --name uvic-course-bot \
           --restart always \
-          -e DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}\
-          -e GUILD_IDS=${{ secrets.GUILD_IDS }} \
           ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
