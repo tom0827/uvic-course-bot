@@ -3,7 +3,7 @@ import requests
 from constants import COOKIE_LINK_BASE, COURSE_SEARCH_BASE, DATA_LINK_BASE, URL_PREFIX
 from playwright.async_api import async_playwright
 
-class CourseAvailability():
+class Sections():
     def __init__(self, subject: str, course_number: str, term: str, year: str):
         self.subject = subject
         self.course_number = course_number
@@ -15,7 +15,7 @@ class CourseAvailability():
             COURSE_NUMBER=self.course_number
         )
 
-    def get_availability(self):
+    def get_sections(self):
         cookie_link = COOKIE_LINK_BASE.format(
             PREFIX=URL_PREFIX,
             TERM=self.year+self.term

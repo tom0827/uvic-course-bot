@@ -4,7 +4,7 @@ from discord import app_commands
 import os
 import logging
 
-from constants import HeatTermEnum
+from constants import FOOTER_TEXT, HeatTermEnum
 from utils.heat_outline import HeatUrl
 
 class HeatOutlineCog(commands.Cog):
@@ -13,7 +13,7 @@ class HeatOutlineCog(commands.Cog):
         self.logger = logging.getLogger(__name__)
 
     @app_commands.command(
-        name="heat",
+        name="outline",
         description="Get heat outline for course"
     )
     @app_commands.describe(
@@ -35,7 +35,7 @@ class HeatOutlineCog(commands.Cog):
             app_commands.Choice(name="2025", value="2025"),
         ]
     )
-    async def heat(
+    async def outline(
         self,
         interaction: discord.Interaction,
         department: str,
@@ -50,11 +50,13 @@ class HeatOutlineCog(commands.Cog):
         embed = discord.Embed(
             title=f"Course Outline ({department} {course_number})",
             description=f"{department} {course_number} - {self.get_term_name(term)} {year}",
+            timestamp=discord.utils.utcnow(),
             color=discord.Color.blue()
         )
         
         link = heat_url.get_link()
         embed.add_field(name="Link", value=link, inline=False)
+        embed.set_footer(text=FOOTER_TEXT)
         
         await interaction.followup.send(embed=embed)
 

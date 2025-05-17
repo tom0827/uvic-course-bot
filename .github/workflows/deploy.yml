@@ -29,7 +29,7 @@ jobs:
         docker push ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
 
     # Deploy the Docker container on AWS Lightsail
-    - name: Deploy to AWS Lightsail
+    - name: Deploys to AWS EC2
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         VPS_HOST: ${{ secrets.VPS_HOST }}
@@ -44,5 +44,5 @@ jobs:
         sudo docker rm uvic-course-bot || true
         sudo docker run --env-file /home/ubuntu/uvic-course-bot/.env -d \
           --name uvic-course-bot \
-          --restart always \
+          --restart on-failure \
           ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest

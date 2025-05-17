@@ -2,22 +2,21 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import os
-import time
 import logging
 
-from utils.course_availability import CourseAvailability
+from utils.sections import Sections
 from utils.course_info import CourseInfo
-from constants import DaysOfWeekEnum
+from constants import FOOTER_TEXT, DaysOfWeekEnum
 
 
-class AvailabilityCog(commands.Cog):
+class SectionsCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.logger = logging.getLogger(__name__)
 
     @app_commands.command(
-        name="availability",
-        description="Find course availability"
+        name="sections",
+        description="Find course sections"
     )
     @app_commands.describe(
         department="Enter the course department (e.g., ECE, CSC)",
@@ -38,7 +37,7 @@ class AvailabilityCog(commands.Cog):
             app_commands.Choice(name="2025", value="2025"),
         ]
     )
-    async def availability(
+    async def sections(
         self,
         interaction: discord.Interaction,
         department: str,
@@ -46,12 +45,11 @@ class AvailabilityCog(commands.Cog):
         term: str,
         year: str
         ):
-        self.logger.info(f"Received availability command: {department} {course_number} {term} {year}")
-        start_time = time.time()
+        self.logger.info(f"Received sections command: {department =} {course_number =} {term =} {year =}")
         await interaction.response.defer()
 
-        course_availability = CourseAvailability(department, course_number, term, year)
-        res = course_availability.get_availability()
+        course_sections = Sections(department, course_number, term, year)
+        res = course_sections.get_sections()
         data = res['data']
 
         course_info = CourseInfo(department, course_number)
@@ -59,7 +57,6 @@ class AvailabilityCog(commands.Cog):
 
         embed = discord.Embed(
             title=f"Course Information for {department} {course_number} - {data[0]['courseTitle']}",
-            description=course_info.description, # TODO: Add hyperlink to course description
             timestamp=discord.utils.utcnow(),
             color=discord.Color.blue()
         )
@@ -113,13 +110,12 @@ class AvailabilityCog(commands.Cog):
             embed.add_field(name="\u200b", value="\u200b", inline=True)
 
         link_field_value = (
-            f"[Course Search Link]({course_availability.url})\n"
+            f"[Course Search Link]({course_sections.url})\n"
             f"[Course Calendar Link]({course_info.get_course_calendar_link()})\n"
             # TODO: Add link to HEAT outline
         )
         embed.add_field(name="Links", value=link_field_value, inline=False)
-        end_time = time.time()
-        embed.set_footer(text=f"Response Time: {end_time - start_time:.2f} seconds")
+        embed.set_footer(text=FOOTER_TEXT)
         await interaction.followup.send(embed=embed)
 
     def convert_to_12_hour_format(self, time):
@@ -146,4 +142,4 @@ async def setup(bot):
     guild_id_str = os.getenv("GUILD_IDS")
     ids = [int(guild_id.strip()) for guild_id in guild_id_str.split(",")]
     guild_objects = [discord.Object(id=guild_id) for guild_id in ids]
-    await bot.add_cog(AvailabilityCog(bot), guilds=guild_objects)
+    await bot.add_cog(SectionsCog(bot), guilds=guild_objects)
