@@ -27,21 +27,23 @@ jobs:
         docker build -t ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest .
         docker push ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
 
-    # Deploy the Docker container on AWS Lightsail
-    - name: Deploys to AWS EC2
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        VPS_HOST: ${{ secrets.VPS_HOST }}
-        VPS_USER: ${{ secrets.VPS_USER }}
+# Set up SSH key properly
+    - name: Set up SSH
       run: |
-        echo "$SSH_PRIVATE_KEY" > ssh_key
-        chmod 400 ssh_key
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
-        ssh -i ssh_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << EOF
-        sudo docker pull ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
-        sudo docker stop uvic-course-bot || true
-        sudo docker rm uvic-course-bot || true
-        sudo docker run --env-file /home/ubuntu/uvic-course-bot/.env -d \
-          --name uvic-course-bot \
-          --restart on-failure \
-          ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
+    # Deploy the Docker container on AWS EC2
+    - name: Deploy to AWS EC2
+      run: |
+        ssh -i ~/.ssh/id_rsa ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} '
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest &&
+          sudo docker stop uvic-course-bot || true &&
+          sudo docker rm uvic-course-bot || true &&
+          sudo docker run --env-file /home/ubuntu/uvic-course-bot/.env -d \
+            --name uvic-course-bot \
+            --restart on-failure \
+            ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
+        '
