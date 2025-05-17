@@ -1,5 +1,4 @@
-name: Deploy
-
+name: CD to AWS EC2
 on:
   push:
     branches:
@@ -7,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to AWS Lightsail
+    name: Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +35,7 @@ jobs:
         VPS_USER: ${{ secrets.VPS_USER }}
       run: |
         echo "$SSH_PRIVATE_KEY" > ssh_key
-        chmod 600 ssh_key
+        chmod 400 ssh_key
 
         ssh -i ssh_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << EOF
         sudo docker pull ${{ secrets.DOCKER_USERNAME }}/uvic-course-bot:latest
