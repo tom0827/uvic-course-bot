@@ -43,7 +43,7 @@ class HeatOutlineCog(commands.Cog):
         term: str,
         year: str
     ):
-        self.logger.info(f"Received heat outline command: {department} {course_number} {term} {year}")
+        self.logger.info(f"Received heat outline command: {department =} {course_number =} {term =} {year =}")
         await interaction.response.defer()
         heat_url = HeatUrl(department, course_number, term, year)
         

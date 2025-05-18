@@ -13,6 +13,8 @@ COURSE_SEARCH_BASE = (
 
 COURSE_CALENDAR_BASE = 'https://www.uvic.ca/calendar/undergrad/#/courses/{PID}'
 
+COURSE_CALENDAR_BASE_KUALI = 'https://www.uvic.ca/calendar/undergrad/index.php#'
+
 URL_PREFIX = "https://banner.uvic.ca/StudentRegistrationSsb/ssb"
 
 COOKIE_LINK_BASE = '{PREFIX}/classSearch/classSearch?term={TERM}&txt_subject=CSUP&txt_courseNumber=000'

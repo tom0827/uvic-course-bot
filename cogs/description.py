@@ -21,21 +21,32 @@ class DescriptionCog(commands.Cog):
         course_number="Enter the course number (e.g., 471, 320)",
     )
     async def description(self, interaction: discord.Interaction, department: str, course_number: str):
-        self.logger.info(f"Received description command: {department} {course_number}")
+        self.logger.info(f"Received description command: {department =} {course_number =}")
         await interaction.response.defer()
-        course_info = CourseInfo(department, course_number)
-        course_info.get_info()
 
-        embed = discord.Embed(
-            title=f"{department.upper()} {course_number.upper()}",
-            timestamp=discord.utils.utcnow(),
-            color=discord.Color.blue()
-        )
-        
-        embed.add_field(name="Description", value=course_info.description, inline=False)
-        embed.set_footer(text=FOOTER_TEXT)
-        
-        await interaction.followup.send(embed=embed)
+        try:
+
+            course_info = CourseInfo(department, course_number)
+            course_info.get_info()
+
+            # Check if course description exists
+            if not course_info.description:
+                raise LookupError(f"No description found for {department.upper()} {course_number.upper()}.")
+
+            embed = discord.Embed(
+                title=f"{department.upper()} {course_number.upper()}",
+                timestamp=discord.utils.utcnow(),
+                color=discord.Color.blue()
+            )
+            
+            embed.add_field(name="Description", value=course_info.description, inline=False)
+            embed.set_footer(text=FOOTER_TEXT)
+            
+            await interaction.followup.send(embed=embed)
+
+        except LookupError as le:
+            self.logger.error(f"LookupError: {le}")
+            await interaction.followup.send(f"⚠️ {le}", ephemeral=True)
 
 async def setup(bot):
     guild_id_str = os.getenv("GUILD_IDS")

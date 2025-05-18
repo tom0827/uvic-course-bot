@@ -31,8 +31,6 @@ class SectionsCog(commands.Cog):
             app_commands.Choice(name="Summer", value="05")
         ],
         year=[
-            app_commands.Choice(name="2022", value="2022"),
-            app_commands.Choice(name="2023", value="2023"),
             app_commands.Choice(name="2024", value="2024"),
             app_commands.Choice(name="2025", value="2025"),
         ]
@@ -71,22 +69,7 @@ class SectionsCog(commands.Cog):
 
             section_data = section['meetingsFaculty'][0]['meetingTime']
 
-            meeting_time_string = f"{section_data['meetingTypeDescription']}\n"
-
-            for s in section['meetingsFaculty']:
-                meeting_time_data = s['meetingTime']
-                days = ""
-                for day in DaysOfWeekEnum:
-                    if meeting_time_data[day.name.lower()]:  # Convert enum name to lowercase to match dictionary keys
-                        if len(days):
-                            days += ", "
-                        days += day.value
-                if not days:
-                    continue
-                meeting_time_string += days + ": "
-                meeting_time_string += self.convert_to_12_hour_format(meeting_time_data['beginTime']) + " - "
-                meeting_time_string += self.convert_to_12_hour_format(meeting_time_data['endTime']) + "\n"
-
+            meeting_time_string = self.__format_meeting_time_string(section, section_data)
 
             field_value = (
                 f"#️⃣ **CRN:** {section['courseReferenceNumber']}\n"
@@ -117,6 +100,24 @@ class SectionsCog(commands.Cog):
         embed.add_field(name="Links", value=link_field_value, inline=False)
         embed.set_footer(text=FOOTER_TEXT)
         await interaction.followup.send(embed=embed)
+
+    def __format_meeting_time_string(self, section, section_data):
+        meeting_time_string = f"{section_data['meetingTypeDescription']}\n"
+
+        for s in section['meetingsFaculty']:
+            meeting_time_data = s['meetingTime']
+            days = ""
+            for day in DaysOfWeekEnum:
+                if meeting_time_data[day.name.lower()]:  # Convert enum name to lowercase to match dictionary keys
+                    if len(days):
+                        days += ", "
+                    days += day.value
+            if not days:
+                continue
+            meeting_time_string += days + ": "
+            meeting_time_string += self.convert_to_12_hour_format(meeting_time_data['beginTime']) + " - "
+            meeting_time_string += self.convert_to_12_hour_format(meeting_time_data['endTime']) + "\n"
+        return meeting_time_string
 
     def convert_to_12_hour_format(self, time):
         if not time:
