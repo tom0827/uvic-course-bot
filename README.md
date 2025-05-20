@@ -15,6 +15,20 @@ A Discord bot designed to provide students with course information, prerequisite
 ### Prerequisites
 
 - Docker (For local development and testing)
+- Discord bot token and server guild IDs added to `.env` file
+
+### Getting a Discord Token
+
+1. Go to the [Discord Developer Portal](https://discord.com/developers/applications).
+2. Click on the **New Application** button.
+3. Give your application a name and click **Create**.
+4. Navigate to the **Bot** tab on the left sidebar.
+5. Click **Add Bot** and confirm your action.
+6. Under the **Token** section, click **Copy** to copy your bot's token. Save this securely as you'll need to add it to your `.env` file.
+7. Assign the necessary permissions for your bot by generating an invite URL:
+    - Go to the **OAuth2** tab, then **URL Generator**.
+    - Select the required bot permissions for your application.
+    - Copy the generated URL and use it to invite the bot to your server.
 
 ### Docker Deployment (For Local Development)
 
