@@ -29,8 +29,6 @@ class HeatOutlineCog(commands.Cog):
             app_commands.Choice(name="Summer", value="051")
         ],
         year=[
-            app_commands.Choice(name="2022", value="2022"),
-            app_commands.Choice(name="2023", value="2023"),
             app_commands.Choice(name="2024", value="2024"),
             app_commands.Choice(name="2025", value="2025"),
         ]
@@ -45,6 +43,7 @@ class HeatOutlineCog(commands.Cog):
     ):
         self.logger.info(f"Received heat outline command: {department =} {course_number =} {term =} {year =}")
         await interaction.response.defer()
+
         heat_url = HeatUrl(department, course_number, term, year)
         
         embed = discord.Embed(
@@ -55,6 +54,11 @@ class HeatOutlineCog(commands.Cog):
         )
         
         link = heat_url.get_link()
+
+        if not heat_url.published_link_valid and not heat_url.unpublished_link_valid:
+            await interaction.followup.send("⚠️ No valid links found for the specified course.")
+            return
+
         embed.add_field(name="Link", value=link, inline=False)
         embed.set_footer(text=FOOTER_TEXT)
         

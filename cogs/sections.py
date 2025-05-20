@@ -46,62 +46,78 @@ class SectionsCog(commands.Cog):
         self.logger.info(f"Received sections command: {department =} {course_number =} {term =} {year =}")
         await interaction.response.defer()
 
-        course_sections = Sections(department, course_number, term, year)
-        res = course_sections.get_sections()
-        data = res['data']
+        try:
+            course_sections = Sections(department, course_number, term, year)
+            res = course_sections.get_sections()
+            data = res.get('data', [])
 
-        course_info = CourseInfo(department, course_number)
-        course_info.get_info()
+            if not data:
+                self.logger.error(f"No sections found for {department} {course_number} in {term} {year}.")
+                raise LookupError(f"No sections found for {department.upper()} {course_number.upper()} in {term} {year}.")
 
+            course_info = CourseInfo(department, course_number)
+            course_info.get_info()
+
+            embed = self.create_embed(department, course_number, course_sections, data, course_info)
+            await interaction.followup.send(embed=embed)
+
+        except LookupError as le:
+            self.logger.error(f"LookupError: {le}")
+            await interaction.followup.send(f"⚠️ {le}", ephemeral=True)
+
+    def create_embed(self, department, course_number, course_sections, data, course_info):
         embed = discord.Embed(
-            title=f"Course Information for {department} {course_number} - {data[0]['courseTitle']}",
-            timestamp=discord.utils.utcnow(),
-            color=discord.Color.blue()
-        )
-
-        for idx, section in enumerate(data):
-            available_spots = section['seatsAvailable']
-
-            method_emoji = "💻" if section['instructionalMethodDescription'] == "Fully Online" else "🧑‍🏫"
-            availability_emoji = "✅" if int(available_spots) > 0 else "❌"
-
-            field_name = f"{section['scheduleTypeDescription']} - {section['sequenceNumber']} {" (FULL)" if int(available_spots) == 0 else ""}"
-
-            section_data = section['meetingsFaculty'][0]['meetingTime']
-
-            meeting_time_string = self.__format_meeting_time_string(section, section_data)
-
-            field_value = (
-                f"#️⃣ **CRN:** {section['courseReferenceNumber']}\n"
-                f"{availability_emoji} **Status:** {section['seatsAvailable']} seats available\n"
-                f"{method_emoji} **Delivery:** {section['instructionalMethodDescription']}\n"
-                f"📍 **Campus:** {section['campusDescription']}\n"
-                f"⌚ **Meeting Times:** {meeting_time_string}"
-                f"📅 **Duration** {section_data['startDate']} - "
-                f"{section_data['endDate']}\n"
+                title=f"Course Information for {department} {course_number} - {data[0]['courseTitle']}",
+                timestamp=discord.utils.utcnow(),
+                color=discord.Color.blue()
             )
 
-            # When index is odd (field 1, 3, 5, etc.), add a blank field to create a two-column layout
-            if idx % 2 == 1:
-                embed.add_field(name="\u200b", value="\u200b", inline=True)
+        for idx, section in enumerate(data):
+            self.add_section_field(embed, idx, section)
             
-            embed.add_field(name=field_name, value=field_value, inline=True)
-        
         # Add two blank fields if the number of courses is odd to maintain the two-column layout
         if len(data) % 2 == 1:
             embed.add_field(name="\u200b", value="\u200b", inline=True)
             embed.add_field(name="\u200b", value="\u200b", inline=True)
 
         link_field_value = (
-            f"[Course Search Link]({course_sections.url})\n"
-            f"[Course Calendar Link]({course_info.get_course_calendar_link()})\n"
-            # TODO: Add link to HEAT outline
-        )
+                f"[Course Search Link]({course_sections.url})\n"
+                f"[Course Calendar Link]({course_info.get_course_calendar_link()})\n"
+                # TODO: Add link to HEAT outline
+            )
         embed.add_field(name="Links", value=link_field_value, inline=False)
         embed.set_footer(text=FOOTER_TEXT)
-        await interaction.followup.send(embed=embed)
+        return embed
 
-    def __format_meeting_time_string(self, section, section_data):
+    def add_section_field(self, embed, idx, section):
+        available_spots = section['seatsAvailable']
+
+        method_emoji = "💻" if section['instructionalMethodDescription'] == "Fully Online" else "🧑‍🏫"
+        availability_emoji = "✅" if int(available_spots) > 0 else "❌"
+
+        field_name = f"{section['scheduleTypeDescription']} - {section['sequenceNumber']} {" (FULL)" if int(available_spots) == 0 else ""}"
+
+        section_data = section['meetingsFaculty'][0]['meetingTime']
+
+        meeting_time_string = self.format_meeting_time_string(section, section_data)
+
+        field_value = (
+                    f"#️⃣ **CRN:** {section['courseReferenceNumber']}\n"
+                    f"{availability_emoji} **Status:** {section['seatsAvailable']} seats available\n"
+                    f"{method_emoji} **Delivery:** {section['instructionalMethodDescription']}\n"
+                    f"📍 **Campus:** {section['campusDescription']}\n"
+                    f"⌚ **Meeting Times:** {meeting_time_string}"
+                    f"📅 **Duration** {section_data['startDate']} - "
+                    f"{section_data['endDate']}\n"
+                )
+
+                # When index is odd (field 1, 3, 5, etc.), add a blank field to create a two-column layout
+        if idx % 2 == 1:
+            embed.add_field(name="\u200b", value="\u200b", inline=True)
+                
+        embed.add_field(name=field_name, value=field_value, inline=True)
+
+    def format_meeting_time_string(self, section, section_data):
         meeting_time_string = f"{section_data['meetingTypeDescription']}\n"
 
         for s in section['meetingsFaculty']:

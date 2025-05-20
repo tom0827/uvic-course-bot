@@ -36,10 +36,10 @@ class CourseInfo():
 
         details = details_response.json()
 
-        self.description = self.__remove_html_tags(details.get('description'))
+        self.description = self.remove_html_tags(details.get('description'))
 
-        self.pre_and_co_reqs = self.__remove_html_tags(details.get('preAndCorequisites'))
-        self.pre_and_co_reqs = self.__format_prereqs(self.pre_and_co_reqs)
+        self.pre_and_co_reqs = self.remove_html_tags(details.get('preAndCorequisites'))
+        self.pre_and_co_reqs = self.format_prereqs(self.pre_and_co_reqs)
 
     def get_course_calendar_link(self):
         if not self.pid:
@@ -48,10 +48,10 @@ class CourseInfo():
 
         return COURSE_CALENDAR_BASE.format(PID=self.pid)
     
-    def __remove_html_tags(self, text):
+    def remove_html_tags(self, text):
         return BeautifulSoup(text, "html.parser").get_text(separator=" ", strip=True)
     
-    def __format_prereqs(self, prereqs):
+    def format_prereqs(self, prereqs):
         if prereqs is None or not prereqs.strip():
             return "No prerequisites"
         

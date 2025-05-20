@@ -30,6 +30,7 @@ class PreReqsCog(commands.Cog):
 
             # Check if prerequisites or corequisites exist
             if not course_info.pre_and_co_reqs:
+                self.logger.error(f"No prerequisites or corequisites found for {department} {course_number}.")
                 raise LookupError(f"No prerequisites or corequisites found for {department.upper()} {course_number.upper()}.")
 
             self.logger.info(f"Course info retrieved: {course_info.pre_and_co_reqs}")

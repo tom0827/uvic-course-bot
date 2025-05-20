@@ -31,6 +31,7 @@ class DescriptionCog(commands.Cog):
 
             # Check if course description exists
             if not course_info.description:
+                self.logger.error(f"No description found for {department} {course_number}.")
                 raise LookupError(f"No description found for {department.upper()} {course_number.upper()}.")
 
             embed = discord.Embed(
