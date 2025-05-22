@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import os
-import logging
 
+from logger import logger
 from utils.sections import Sections
 from utils.course_info import CourseInfo
 from constants import FOOTER_TEXT, DaysOfWeekEnum
@@ -12,7 +12,6 @@ from constants import FOOTER_TEXT, DaysOfWeekEnum
 class SectionsCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.logger = logging.getLogger(__name__)
 
     @app_commands.command(
         name="sections",
@@ -43,7 +42,7 @@ class SectionsCog(commands.Cog):
         term: str,
         year: str
         ):
-        self.logger.info(f"Received sections command: {department =} {course_number =} {term =} {year =}")
+        logger.info(f"Received sections command: {department =} {course_number =} {term =} {year =}")
         await interaction.response.defer()
 
         try:
@@ -52,7 +51,7 @@ class SectionsCog(commands.Cog):
             data = res.get('data', [])
 
             if not data:
-                self.logger.error(f"No sections found for {department} {course_number} in {term} {year}.")
+                logger.error(f"No sections found for {department} {course_number} in {term} {year}.")
                 raise LookupError(f"No sections found for {department.upper()} {course_number.upper()} in {term} {year}.")
 
             course_info = CourseInfo(department, course_number)
@@ -62,7 +61,7 @@ class SectionsCog(commands.Cog):
             await interaction.followup.send(embed=embed)
 
         except LookupError as le:
-            self.logger.error(f"LookupError: {le}")
+            logger.error(f"LookupError: {le}")
             await interaction.followup.send(f"⚠️ {le}", ephemeral=True)
 
     def create_embed(self, department, course_number, course_sections, data, course_info):

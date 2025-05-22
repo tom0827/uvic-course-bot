@@ -1,10 +1,10 @@
-import logging
-from constants import HEAT_BASE_URL
 import subprocess
+
+from constants import HEAT_BASE_URL
+from logger import logger
 
 class HeatUrl():
     def __init__(self, department: str, course_number, term: str, year: str):
-        self.logger = logging.getLogger(__name__)
         self.department = department.upper()
         self.course_number = course_number
         self.course = f"{self.department}{self.course_number}"
@@ -34,7 +34,7 @@ class HeatUrl():
 
 
     def check_link_exists(self, url):
-        self.logger.info(f"Checking link: {url}")
+        logger.info(f"Checking link: {url}")
 
         curl_command = [
             "curl",

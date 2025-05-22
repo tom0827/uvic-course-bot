@@ -1,12 +1,11 @@
 import requests
-import logging
 from constants import CATALOG_URL, COURSE_CALENDAR_BASE, COURSE_CALENDAR_BASE_KUALI, DETAILS_BASE_URL
 from bs4 import BeautifulSoup
+from logger import logger
 
 class CourseInfo():
     """Class to get basic course info"""
     def __init__(self, department: str, course_number: str):
-        self.logger = logging.getLogger(__name__)
         self.department = department.upper()
         self.course_number = course_number
         self.course = f"{self.department}{self.course_number}"
@@ -23,13 +22,13 @@ class CourseInfo():
         course_item = next((item for item in catalog if item.get('__catalogCourseId') == self.course), None)
 
         if course_item is None:
-            self.logger.warning(f"Course {self.course} not found in catalog.")
+            logger.warning(f"Course {self.course} not found in catalog.")
             return
 
         self.pid = course_item.get('pid')
         self.title = course_item.get('title')
 
-        self.logger.info(f"Fetching Course Details Link: {DETAILS_BASE_URL}/{self.pid}")
+        logger.info(f"Fetching Course Details Link: {DETAILS_BASE_URL}/{self.pid}")
 
         details_response = requests.get(f"{DETAILS_BASE_URL}/{self.pid}", timeout=10)
         details_response.raise_for_status()
@@ -43,7 +42,7 @@ class CourseInfo():
 
     def get_course_calendar_link(self):
         if not self.pid:
-            self.logger.error("PID is not set. Cannot generate course calendar link.")
+            logger.error("PID is not set. Cannot generate course calendar link.")
             return
 
         return COURSE_CALENDAR_BASE.format(PID=self.pid)

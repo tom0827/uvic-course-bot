@@ -2,15 +2,14 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import os
-import logging
 
+from logger import logger
 from constants import FOOTER_TEXT, HeatTermEnum
 from utils.heat_outline import HeatUrl
 
 class HeatOutlineCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.logger = logging.getLogger(__name__)
 
     @app_commands.command(
         name="outline",
@@ -41,7 +40,7 @@ class HeatOutlineCog(commands.Cog):
         term: str,
         year: str
     ):
-        self.logger.info(f"Received heat outline command: {department =} {course_number =} {term =} {year =}")
+        logger.info(f"Received heat outline command: {department =} {course_number =} {term =} {year =}")
         await interaction.response.defer()
 
         heat_url = HeatUrl(department, course_number, term, year)

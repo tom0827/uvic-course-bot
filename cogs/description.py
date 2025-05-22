@@ -1,16 +1,15 @@
 import os
-import logging
 import discord
 from discord.ext import commands
 from discord import app_commands
 
 from constants import FOOTER_TEXT
 from utils.course_info import CourseInfo
+from logger import logger
 
 class DescriptionCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.logger = logging.getLogger(__name__)
 
     @app_commands.command(
         name="description",
@@ -21,7 +20,7 @@ class DescriptionCog(commands.Cog):
         course_number="Enter the course number (e.g., 471, 320)",
     )
     async def description(self, interaction: discord.Interaction, department: str, course_number: str):
-        self.logger.info(f"Received description command: {department =} {course_number =}")
+        logger.info(f"Received description command: {department =} {course_number =}")
         await interaction.response.defer()
 
         try:
@@ -31,7 +30,7 @@ class DescriptionCog(commands.Cog):
 
             # Check if course description exists
             if not course_info.description:
-                self.logger.error(f"No description found for {department} {course_number}.")
+                logger.info(f"No description found for {department} {course_number}.")
                 raise LookupError(f"No description found for {department.upper()} {course_number.upper()}.")
 
             embed = discord.Embed(
@@ -46,7 +45,7 @@ class DescriptionCog(commands.Cog):
             await interaction.followup.send(embed=embed)
 
         except LookupError as le:
-            self.logger.error(f"LookupError: {le}")
+            logger.info(f"LookupError: {le}")
             await interaction.followup.send(f"⚠️ {le}", ephemeral=True)
 
 async def setup(bot):

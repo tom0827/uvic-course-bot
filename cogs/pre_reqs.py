@@ -1,16 +1,14 @@
 import os
-import logging
 import discord
 from discord.ext import commands
 from discord import app_commands
-
+from logger import logger
 from constants import FOOTER_TEXT
 from utils.course_info import CourseInfo
 
 class PreReqsCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.logger = logging.getLogger(__name__)
 
     @app_commands.command(
         name="prereqs",
@@ -21,7 +19,7 @@ class PreReqsCog(commands.Cog):
         course_number="Enter the course number (e.g., 471, 320)",
     )
     async def prereqs(self, interaction: discord.Interaction, department: str, course_number: str):
-        self.logger.info(f"Received prereqs command: {department =} {course_number =}")
+        logger.info(f"Received prereqs command: {department =} {course_number =}")
         await interaction.response.defer()
 
         try:
@@ -30,10 +28,10 @@ class PreReqsCog(commands.Cog):
 
             # Check if prerequisites or corequisites exist
             if not course_info.pre_and_co_reqs:
-                self.logger.error(f"No prerequisites or corequisites found for {department} {course_number}.")
+                logger.error(f"No prerequisites or corequisites found for {department} {course_number}.")
                 raise LookupError(f"No prerequisites or corequisites found for {department.upper()} {course_number.upper()}.")
 
-            self.logger.info(f"Course info retrieved: {course_info.pre_and_co_reqs}")
+            logger.info(f"Course info retrieved: {course_info.pre_and_co_reqs}")
 
             embed = discord.Embed(
                 title=f"{department.upper()} {course_number.upper()}",
@@ -47,7 +45,7 @@ class PreReqsCog(commands.Cog):
             await interaction.followup.send(embed=embed)
     
         except LookupError as le:
-            self.logger.error(f"LookupError: {le}")
+            logger.error(f"LookupError: {le}")
             await interaction.followup.send(f"⚠️ {le}", ephemeral=True)
 
 async def setup(bot):
