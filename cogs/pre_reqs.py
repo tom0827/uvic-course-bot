@@ -5,6 +5,7 @@ from discord import app_commands
 from logger import logger
 from constants import FOOTER_TEXT
 from utils.course_info import CourseInfo
+from utils.decorators import log_command, time_command
 
 class PreReqsCog(commands.Cog):
     def __init__(self, bot):
@@ -18,8 +19,9 @@ class PreReqsCog(commands.Cog):
         department="Enter the course department (e.g., ECE, CSC)",
         course_number="Enter the course number (e.g., 471, 320)",
     )
+    @log_command
+    @time_command
     async def prereqs(self, interaction: discord.Interaction, department: str, course_number: str):
-        logger.info(f"Received prereqs command: {department =} {course_number =}")
         await interaction.response.defer()
 
         try:
@@ -30,8 +32,6 @@ class PreReqsCog(commands.Cog):
             if not course_info.pre_and_co_reqs:
                 logger.error(f"No prerequisites or corequisites found for {department} {course_number}.")
                 raise LookupError(f"No prerequisites or corequisites found for {department.upper()} {course_number.upper()}.")
-
-            logger.info(f"Course info retrieved: {course_info.pre_and_co_reqs}")
 
             embed = discord.Embed(
                 title=f"{department.upper()} {course_number.upper()}",

@@ -7,7 +7,7 @@ from logger import logger
 from utils.sections import Sections
 from utils.course_info import CourseInfo
 from constants import FOOTER_TEXT, DaysOfWeekEnum
-
+from utils.decorators import log_command, time_command
 
 class SectionsCog(commands.Cog):
     def __init__(self, bot):
@@ -30,10 +30,13 @@ class SectionsCog(commands.Cog):
             app_commands.Choice(name="Summer", value="05")
         ],
         year=[
+            app_commands.Choice(name="2023", value="2023"),
             app_commands.Choice(name="2024", value="2024"),
             app_commands.Choice(name="2025", value="2025"),
         ]
     )
+    @log_command
+    @time_command
     async def sections(
         self,
         interaction: discord.Interaction,
@@ -42,7 +45,6 @@ class SectionsCog(commands.Cog):
         term: str,
         year: str
         ):
-        logger.info(f"Received sections command: {department =} {course_number =} {term =} {year =}")
         await interaction.response.defer()
 
         try:

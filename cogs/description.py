@@ -5,6 +5,7 @@ from discord import app_commands
 
 from constants import FOOTER_TEXT
 from utils.course_info import CourseInfo
+from utils.decorators import log_command, time_command
 from logger import logger
 
 class DescriptionCog(commands.Cog):
@@ -19,12 +20,12 @@ class DescriptionCog(commands.Cog):
         department="Enter the course department (e.g., ECE, CSC)",
         course_number="Enter the course number (e.g., 471, 320)",
     )
+    @log_command
+    @time_command
     async def description(self, interaction: discord.Interaction, department: str, course_number: str):
-        logger.info(f"Received description command: {department =} {course_number =}")
         await interaction.response.defer()
 
         try:
-
             course_info = CourseInfo(department, course_number)
             course_info.get_info()
 

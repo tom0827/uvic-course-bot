@@ -6,6 +6,7 @@ import os
 from logger import logger
 from constants import FOOTER_TEXT, HeatTermEnum
 from utils.heat_outline import HeatUrl
+from utils.decorators import log_command, time_command
 
 class HeatOutlineCog(commands.Cog):
     def __init__(self, bot):
@@ -28,10 +29,13 @@ class HeatOutlineCog(commands.Cog):
             app_commands.Choice(name="Summer", value="051")
         ],
         year=[
+            app_commands.Choice(name="2023", value="2023"),
             app_commands.Choice(name="2024", value="2024"),
             app_commands.Choice(name="2025", value="2025"),
         ]
     )
+    @log_command
+    @time_command
     async def outline(
         self,
         interaction: discord.Interaction,
@@ -40,7 +44,6 @@ class HeatOutlineCog(commands.Cog):
         term: str,
         year: str
     ):
-        logger.info(f"Received heat outline command: {department =} {course_number =} {term =} {year =}")
         await interaction.response.defer()
 
         heat_url = HeatUrl(department, course_number, term, year)
