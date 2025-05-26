@@ -1,4 +1,3 @@
-import os
 import discord
 from discord.ext import commands
 from discord import app_commands
@@ -49,6 +48,13 @@ class PreReqsCog(commands.Cog):
             await interaction.followup.send(f"⚠️ {le}", ephemeral=True)
 
 async def setup(bot):
+    import os
+    APP_ENVIRONMENT = os.getenv("APP_ENVIRONMENT", "development").lower()
+
+    if APP_ENVIRONMENT == "production":
+        await bot.add_cog(PreReqsCog(bot))
+        return
+
     guild_id_str = os.getenv("GUILD_IDS")
     ids = [int(guild_id.strip()) for guild_id in guild_id_str.split(",")]
     guild_objects = [discord.Object(id=guild_id) for guild_id in ids]

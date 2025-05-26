@@ -157,6 +157,13 @@ class SectionsCog(commands.Cog):
         return f"{hours}:{minutes:02d} {period}"
 
 async def setup(bot):
+    import os
+    APP_ENVIRONMENT = os.getenv("APP_ENVIRONMENT", "development").lower()
+
+    if APP_ENVIRONMENT == "production":
+        await bot.add_cog(SectionsCog(bot))
+        return
+
     guild_id_str = os.getenv("GUILD_IDS")
     ids = [int(guild_id.strip()) for guild_id in guild_id_str.split(",")]
     guild_objects = [discord.Object(id=guild_id) for guild_id in ids]

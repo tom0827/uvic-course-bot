@@ -8,6 +8,7 @@ load_dotenv()
 guild_id_str = os.getenv("GUILD_IDS")
 GUILD_IDS = [int(guild_id.strip()) for guild_id in guild_id_str.split(",")]
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+APP_ENVIRONMENT = os.getenv("APP_ENVIRONMENT", "development").lower()
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -23,9 +24,13 @@ async def load_extensions():
 @bot.event
 async def on_ready():
     logger.info(f'Bot is logged in as {bot.user.name} ({bot.user.id})')
-    for guild_id in GUILD_IDS:
-        await bot.tree.sync(guild=discord.Object(id=guild_id))
-        logger.info(f'Synced commands to guild ID: {guild_id}')
+    if APP_ENVIRONMENT == "production":
+        await bot.tree.sync()
+        logger.info('Synced commands globally')
+    else:
+        for guild_id in GUILD_IDS:
+            await bot.tree.sync(guild=discord.Object(id=guild_id))
+            logger.info(f'Synced commands to guild ID: {guild_id}')
 
 # Run the bot
 async def main():
