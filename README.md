@@ -77,7 +77,7 @@ Fetch a course description:
 
 **Example Output:**
 
-![Outline Example](/assets/outline.png)
+![Outline Example](/assets/description.png)
 
 ---
 
@@ -86,6 +86,12 @@ Get the course outline from the HEAT system:
 ```
 /outline department:<department> course_number:<course_number> term:<term> year:<year>
 ```
+
+**Example Output:**
+
+![Outline Example](/assets/outline.png)
+
+---
 
 ## Contributing
 
