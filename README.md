@@ -51,17 +51,35 @@ Retrieve all sections with their meeting times and current enrollment
 /sections department:<department> course_number:<course_number> term:<term> year:<year>
 ```
 
+**Example Output:**
+
+![Sections Example](/assets/sections.png)
+
+---
+
 ### Prerequisites
 Retrieve prerequisites and corequisites for a course:
 ```
 /prereqs department:<department> course_number:<course_number>
 ```
 
+**Example Output:**
+
+![Prerequisites Example](/assets/prereqs.png)
+
+---
+
 ### Course Description
 Fetch a course description:
 ```
 /description department:<department> course_number:<course_number>
 ```
+
+**Example Output:**
+
+![Outline Example](/assets/outline.png)
+
+---
 
 ### HEAT Outline
 Get the course outline from the HEAT system:
