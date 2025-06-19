@@ -33,6 +33,7 @@ class SectionsCog(commands.Cog):
             app_commands.Choice(name="2023", value="2023"),
             app_commands.Choice(name="2024", value="2024"),
             app_commands.Choice(name="2025", value="2025"),
+            app_commands.Choice(name="2026", value="2026"),
         ]
     )
     @log_command
