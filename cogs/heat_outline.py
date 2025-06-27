@@ -1,10 +1,16 @@
+import os
 import discord
 from discord.ext import commands
 from discord import app_commands
+from dotenv import load_dotenv
 from logger import logger
 from constants import FOOTER_TEXT, HeatTermEnum
-from utils.heat_outline import HeatUrl
+from utils.course_api_client import CourseApiClient
 from utils.decorators import log_command, time_command
+
+load_dotenv()
+COURSE_API_URL = os.getenv("COURSE_API_URL")
+client = CourseApiClient(COURSE_API_URL)
 
 class HeatOutlineCog(commands.Cog):
     def __init__(self, bot):
@@ -45,20 +51,22 @@ class HeatOutlineCog(commands.Cog):
     ):
         await interaction.response.defer()
 
-        heat_url = HeatUrl(department, course_number, term, year)
+        data = client.get_course_outline(term=f"{year}{term}", course=f"{department}{course_number}")
+
+        if data.get('isValid') is False:
+            data = client.get_course_outline(term=f"{year}{term}", course=f"{department}{course_number}", unpublished=True)
         
+        if data.get('isValid') is False:
+            await interaction.followup.send("⚠️ No valid outline found for the specified course.")
+            return
+
         embed = discord.Embed(
-            title=f"Course Outline ({department} {course_number})",
-            description=f"{department} {course_number} - {self.get_term_name(term)} {year}",
+            title=f"{department} {course_number} - {year} {self.get_term_name(term)}",
             timestamp=discord.utils.utcnow(),
             color=discord.Color.blue()
         )
         
-        link = heat_url.get_link()
-
-        if not heat_url.published_link_valid and not heat_url.unpublished_link_valid:
-            await interaction.followup.send("⚠️ No valid links found for the specified course.")
-            return
+        link = data.get("link")
 
         embed.add_field(name="Link", value=link, inline=False)
         embed.set_footer(text=FOOTER_TEXT)

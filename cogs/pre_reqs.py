@@ -1,10 +1,17 @@
+import os
 import discord
 from discord.ext import commands
 from discord import app_commands
+from dotenv import load_dotenv
 from logger import logger
 from constants import FOOTER_TEXT
-from utils.course_info import CourseInfo
+from utils.course_api_client import CourseApiClient
 from utils.decorators import log_command, time_command
+from utils.strings import format_prereqs, remove_html_tags
+
+load_dotenv()
+COURSE_API_URL = os.getenv("COURSE_API_URL")
+client = CourseApiClient(COURSE_API_URL)
 
 class PreReqsCog(commands.Cog):
     def __init__(self, bot):
@@ -24,11 +31,9 @@ class PreReqsCog(commands.Cog):
         await interaction.response.defer()
 
         try:
-            course_info = CourseInfo(department, course_number)
-            course_info.get_info()
-
+            data = client.get_course_info(course=f"{department}{course_number}")
             # Check if prerequisites or corequisites exist
-            if not course_info.pre_and_co_reqs:
+            if not data.get("preAndCorequisites"):
                 logger.error(f"No prerequisites or corequisites found for {department} {course_number}.")
                 raise LookupError(f"No prerequisites or corequisites found for {department.upper()} {course_number.upper()}.")
 
@@ -37,8 +42,10 @@ class PreReqsCog(commands.Cog):
                 timestamp=discord.utils.utcnow(),
                 color=discord.Color.blue()
             )
-            
-            embed.add_field(name="Prerequisites", value=course_info.pre_and_co_reqs, inline=False)
+
+            preAndCoReqs = format_prereqs(remove_html_tags(data.get("preAndCorequisites", "")))
+
+            embed.add_field(name="Prerequisites", value=preAndCoReqs, inline=False)
             embed.set_footer(text=FOOTER_TEXT)
             
             await interaction.followup.send(embed=embed)

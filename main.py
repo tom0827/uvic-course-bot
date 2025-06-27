@@ -24,15 +24,16 @@ async def load_extensions():
 @bot.event
 async def on_ready():
     logger.info(f'Bot is logged in as {bot.user.name} ({bot.user.id})')
+    logger.info(f'APP_ENVIRONMENT: {APP_ENVIRONMENT}')
     if APP_ENVIRONMENT == "production":
         await bot.tree.sync()
         logger.info('Synced commands globally')
     else:
+        logger.info('Syncing commands to specific guilds...')
         for guild_id in GUILD_IDS:
             await bot.tree.sync(guild=discord.Object(id=guild_id))
             logger.info(f'Synced commands to guild ID: {guild_id}')
 
-# Run the bot
 async def main():
     async with bot:
         await load_extensions()
