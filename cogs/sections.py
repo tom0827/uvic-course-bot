@@ -3,11 +3,16 @@ from discord.ext import commands
 from discord import app_commands
 import os
 
+from dotenv import load_dotenv
+
 from logger import logger
-from utils.sections import Sections
-from utils.course_info import CourseInfo
-from constants import FOOTER_TEXT, DaysOfWeekEnum
+from utils.course_api_client import CourseApiClient
+from constants import COURSE_CALENDAR_BASE, COURSE_SEARCH_BASE, FOOTER_TEXT, DaysOfWeekEnum
 from utils.decorators import log_command, time_command
+
+load_dotenv()
+COURSE_API_URL = os.getenv("COURSE_API_URL")
+client = CourseApiClient(COURSE_API_URL)
 
 class SectionsCog(commands.Cog):
     def __init__(self, bot):
@@ -49,25 +54,29 @@ class SectionsCog(commands.Cog):
         await interaction.response.defer()
 
         try:
-            course_sections = Sections(department, course_number, term, year)
-            res = course_sections.get_sections()
-            data = res.get('data', [])
+            data = client.get_course_sections(term=year+term, course=f"{department}{course_number}")
+            pid = client.get_course_info(course=f"{department}{course_number}").get('pid')
 
             if not data:
                 logger.error(f"No sections found for {department} {course_number} in {term} {year}.")
                 raise LookupError(f"No sections found for {department.upper()} {course_number.upper()} in {term} {year}.")
+            
+            course_search_url = COURSE_SEARCH_BASE.format(
+                TERM=year+term,
+                SUBJECT=department.upper(),
+                COURSE_NUMBER=course_number
+            )
+            
+            course_calendar_link = COURSE_CALENDAR_BASE.format(PID=pid)
 
-            course_info = CourseInfo(department, course_number)
-            course_info.get_info()
-
-            embed = self.create_embed(department, course_number, course_sections, data, course_info)
+            embed = self.create_embed(department, course_number, course_search_url, data, course_calendar_link)
             await interaction.followup.send(embed=embed)
 
         except LookupError as le:
             logger.error(f"LookupError: {le}")
             await interaction.followup.send(f"⚠️ {le}", ephemeral=True)
 
-    def create_embed(self, department, course_number, course_sections, data, course_info):
+    def create_embed(self, department, course_number, course_search_url, data, course_calendar_link):
         embed = discord.Embed(
                 title=f"Course Information for {department} {course_number} - {data[0]['courseTitle']}",
                 timestamp=discord.utils.utcnow(),
@@ -81,10 +90,11 @@ class SectionsCog(commands.Cog):
         if len(data) % 2 == 1:
             embed.add_field(name="\u200b", value="\u200b", inline=True)
             embed.add_field(name="\u200b", value="\u200b", inline=True)
+            
 
         link_field_value = (
-                f"[Course Search Link]({course_sections.url})\n"
-                f"[Course Calendar Link]({course_info.get_course_calendar_link()})\n"
+                f"[Course Search Link]({course_search_url})\n"
+                f"[Course Calendar Link]({course_calendar_link})\n"
                 # TODO: Add link to HEAT outline
             )
         embed.add_field(name="Links", value=link_field_value, inline=False)

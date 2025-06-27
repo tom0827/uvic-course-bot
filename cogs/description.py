@@ -1,10 +1,17 @@
+import os
 import discord
 from discord.ext import commands
 from discord import app_commands
+from dotenv import load_dotenv
 from constants import FOOTER_TEXT
-from utils.course_info import CourseInfo
+from utils.course_api_client import CourseApiClient
 from utils.decorators import log_command, time_command
 from logger import logger
+from utils.strings import remove_html_tags
+
+load_dotenv()
+COURSE_API_URL = os.getenv("COURSE_API_URL")
+client = CourseApiClient(COURSE_API_URL)
 
 class DescriptionCog(commands.Cog):
     def __init__(self, bot):
@@ -23,12 +30,9 @@ class DescriptionCog(commands.Cog):
     async def description(self, interaction: discord.Interaction, department: str, course_number: str):
         await interaction.response.defer()
 
-        try:
-            course_info = CourseInfo(department, course_number)
-            course_info.get_info()
-
-            # Check if course description exists
-            if not course_info.description:
+        try:            
+            data = client.get_course_info(course=f"{department}{course_number}")
+            if not data.get("description"):
                 logger.info(f"No description found for {department} {course_number}.")
                 raise LookupError(f"No description found for {department.upper()} {course_number.upper()}.")
 
@@ -37,8 +41,10 @@ class DescriptionCog(commands.Cog):
                 timestamp=discord.utils.utcnow(),
                 color=discord.Color.blue()
             )
-            
-            embed.add_field(name="Description", value=course_info.description, inline=False)
+
+            description = remove_html_tags(data.get("description", ""))
+
+            embed.add_field(name="Description", value=description, inline=False)
             embed.set_footer(text=FOOTER_TEXT)
             
             await interaction.followup.send(embed=embed)
